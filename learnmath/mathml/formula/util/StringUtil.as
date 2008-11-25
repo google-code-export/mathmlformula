@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.util{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -7,12 +8,12 @@ import learnmath.mathml.formula.*;
 import learnmath.mathml.formula.util.*;
 import learnmath.mathml.formula.entities.*;
 
-class learnmath.mathml.formula.util.StringUtil{
+public class StringUtil{
 	
-	public static function trim(txt_str:String) {
-		if(txt_str==null) return "";
+	public static function trim(txt_str:String):String {
+		if(txt_str=="") return "";
 		while (true){
-			if(txt_str.charAt(0) == " " | txt_str.charCodeAt(0)==160){
+			if(txt_str.charAt(0) == " " || txt_str.charCodeAt(0)==160){
 			}else if(txt_str.charCodeAt(0)<14) {
 			}else{
 				break;
@@ -20,7 +21,7 @@ class learnmath.mathml.formula.util.StringUtil{
 				txt_str = txt_str.substring(1, txt_str.length);
 		}
 		while (true) {
-			if(txt_str.charAt(txt_str.length-1) == " " | txt_str.charCodeAt(txt_str.length-1)==160){
+			if(txt_str.charAt(txt_str.length-1) == " " || txt_str.charCodeAt(txt_str.length-1)==160){
 			}else if(txt_str.charCodeAt(txt_str.length-1)<14) {
 			}else{
 				break;
@@ -35,11 +36,11 @@ class learnmath.mathml.formula.util.StringUtil{
 	}    
 	
 	
-	public static function replace(input, stringToFind, stringToInsert):String {
-		var output = "";
-		var len = stringToFind.length;
+	public static function replace(input:String, stringToFind:String, stringToInsert:String):String {
+		var output:String = "";
+		var len:int = stringToFind.length;
 		while (input.indexOf(stringToFind) != -1) {
-			var currOffset = input.indexOf(stringToFind);
+			var currOffset:int = input.indexOf(stringToFind);
 			output = output+input.substring(0, currOffset);
 			output = output+stringToInsert;
 			input = input.substr(currOffset+len, input.length);
@@ -54,4 +55,6 @@ class learnmath.mathml.formula.util.StringUtil{
 		return false;
 	}
 	
+}
+
 }

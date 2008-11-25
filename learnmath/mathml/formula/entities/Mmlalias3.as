@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.entities{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -5,16 +6,16 @@
 ---------------------------------------------------------------*/
 import learnmath.mathml.formula.entities.*;
 
-class learnmath.mathml.formula.entities.Mmlalias3 extends EntityGroup{
+public class Mmlalias3 extends EntityGroup{
 	
 	
 	//Aliases for MathML 2.0
 	
-	public function getEntities(){
+	override public function getEntities():String{
 		return allCodes;
 	}
 
-static var allCodes = "<! longleftarrow    &#x027F5; >" + 
+private static var allCodes:String = "<! longleftarrow    &#x027F5; >" + 
 "<! LongLeftRightArrow &#x027F7; >" + 
 "<! Longleftrightarrow &#x027FA; >" + 
 "<! longleftrightarrow &#x027F7; >" + 
@@ -152,4 +153,6 @@ static var allCodes = "<! longleftarrow    &#x027F5; >" +
 "<! propto           &#x0221D; >" + 
 "<! quaternions      &#x0210D; >" + 
 "<! questeq          &#x0225F; >";
+}
+
 }

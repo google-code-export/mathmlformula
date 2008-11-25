@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.entities{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -5,15 +6,15 @@
 ---------------------------------------------------------------*/
 import learnmath.mathml.formula.entities.*;
 
-class learnmath.mathml.formula.entities.Isomopf extends EntityGroup{
+public class Isomopf extends EntityGroup{
 	
 	//Math Alphabets: Open Face for MathML 2.0
 	
-	public function getEntities(){
+	override public function getEntities():String{
 		return allCodes;
 	}
 
-static var allCodes = "<! Aopf             &#x1D538; >" + 
+private static var allCodes:String = "<! Aopf             &#x1D538; >" + 
 "<! Bopf             &#x1D539; >" + 
 "<! Copf             &#x02102; >" + 
 "<! Dopf             &#x1D53B; >" + 
@@ -39,4 +40,6 @@ static var allCodes = "<! Aopf             &#x1D538; >" +
 "<! Xopf             &#x1D54F; >" + 
 "<! Yopf             &#x1D550; >" + 
 "<! Zopf             &#x02124; >";
+}
+
 }

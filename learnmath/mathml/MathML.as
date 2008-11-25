@@ -1,3 +1,4 @@
+﻿package learnmath.mathml{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -9,37 +10,39 @@ import learnmath.mathml.formula.script.*;
 import learnmath.mathml.formula.token.*;
 import learnmath.mathml.formula.util.*;
 import flash.geom.*;
+import flash.display.MovieClip;
 
-class learnmath.mathml.MathML{
+public class MathML{
 	
-	var _xml:XML;
-	var dE:DrawFormula;
-		
-	public function MathML(xml:XML){
+	private var _xml:XML;
+	public var dE:DrawFormula;
+	
+	public function MathML(xml:XML):void{
 		this._xml = xml;
 
-		var node:XMLNode = _xml.childNodes[0];
-		if(node.nodeName!=null && node.nodeName.toLowerCase().indexOf("math")>-1){
-			var index:Number = 0;
-			for(var i:Number =0; i<node.childNodes.length;i++){
-				if(node.childNodes[i].nodeName!=null){
+		var node:XML = _xml.children()[0];
+		
+		if(node.localName().toLowerCase().indexOf("math")>-1){
+			var index:int = 0;
+			for(var i:int =0; i<node.children().length();i++){
+				if(node.children()[i].localName()!=""){
 					index = i;
 					break;
 				}
 			}
-			node = node.childNodes[index];
+			node = node.children()[index];
 		}else{
-			var index:Number = 0;
-			for(var i:Number =0; i<_xml.childNodes.length;i++){
-				if(_xml.childNodes[i].nodeName!=null){
+			index = 0;
+			for(i =0; i<_xml.children().length();i++){
+				if(_xml.children()[i].localName()!=""){
 					index = i;
 					break;
 				}
 			}
-			node= _xml.childNodes[index];
+			node= _xml.children()[index];
 		}
 		
-		var rootBox = loadNode(node, null);
+		var rootBox:Box = loadNode(node, null);
 		dE = new DrawFormula(rootBox);
 	}
 	
@@ -48,8 +51,8 @@ class learnmath.mathml.MathML{
 		return dE.draw(graph, style, start);
 	}
 	
-	private function loadNode(node:XMLNode, parentBox:Box):Box{
-		var name:String = node.nodeName.toLowerCase();
+	private function loadNode(node:XML, parentBox:Box):Box{
+		var name:String = node.localName().toLowerCase();
 		var box:Box;
 		if(name=='mrow'){
 			box = loadMrow(node, parentBox);
@@ -97,144 +100,144 @@ class learnmath.mathml.MathML{
 		return box;
 	}
 	
-	private function loadAttributes(node:XMLNode, box:Box){
-		if(node.attributes["color"]!=null){
-			box.style.color = node.attributes["color"];
+	private function loadAttributes(node:XML, box:Box):void{
+		if(node.@color.length()==1){
+			box.style.color = node.attribute("color");
 		}
-		if(node.attributes["fontweight"]!=null){
-			box.style.fontweight = node.attributes["fontweight"];
+		if(node.@fontweight.length()==1){
+			box.style.fontweight = node.attribute("fontweight");
 		}
-		if(node.attributes["fontstyle"]!=null){
-			box.style.fontstyle = node.attributes["fontstyle"];
+		if(node.@fontstyle.length()==1){
+			box.style.fontstyle = node.attribute("fontstyle");
 		}
-		if(node.attributes["fontsize"]!=null){
-			box.style.size = int(node.attributes["fontsize"]);
+		if(node.@fontsize.length()==1){
+			box.style.size = int(node.attribute("fontsize"));
 		}
-		if(node.attributes["fontfamily"]!=null){
-			box.style.font = node.attributes["fontfamily"];
+		if(node.@fontfamily.length()==1){
+			box.style.font = node.attribute("fontfamily");
 		}
 	}
 	
-	private function loadMrow(node:XMLNode, parentBox:Box):Box{
+	private function loadMrow(node:XML, parentBox:Box):Box{
 		var nodeBox:RowBox = new RowBox(parentBox);
-		for(var i:Number =0; i<node.childNodes.length;i++){
-			if(node.childNodes[i].nodeName!=null){
-				var child:Box = loadNode(node.childNodes[i], nodeBox);
+		for(var i:int =0; i<node.children().length();i++){
+			if(node.children()[i].localName()!=null){
+				var child:Box = loadNode(node.children()[i], nodeBox);
 				nodeBox.addChild(child);
 			}
 		}
 		return nodeBox;
 	}
 	
-	private function loadMTable(node:XMLNode, parentBox:Box):Box{
+	private function loadMTable(node:XML, parentBox:Box):Box{
 		var nodeBox:TableBox = new TableBox(parentBox);
-		for(var i:Number =0; i<node.childNodes.length;i++){
-			if(node.childNodes[i].nodeName!=null){
-				if(node.childNodes[i].nodeName.toLowerCase()=="mtr"){
-					var child:Box = loadNode(node.childNodes[i], nodeBox);
+		for(var i:int =0; i<node.children().length();i++){
+			if(node.children()[i].localName()!=null){
+				if(node.children()[i].localName().toLowerCase()=="mtr"){
+					var child:Box = loadNode(node.children()[i], nodeBox);
 					nodeBox.addRow(child);
 				}
 			}
 		}
-		if(node.attributes["rowalign"]!=null){
-			nodeBox.rowalign = StringUtil.trim(node.attributes["rowalign"]);
+		if(node.attribute("rowalign")!=""){
+			nodeBox.rowalign = StringUtil.trim(node.attribute("rowalign"));
 		}
-		if(node.attributes["columnalign"]!=null){
-			nodeBox.columnalign = StringUtil.trim(node.attributes["columnalign"]);
+		if(node.attribute("columnalign")!=""){
+			nodeBox.columnalign = StringUtil.trim(node.attribute("columnalign"));
 		}
-		if(node.attributes["rowspacing"]!=null){
-			nodeBox.rowspacing = Number(StringUtil.trim(node.attributes["rowspacing"]));
+		if(node.attribute("rowspacing")!=""){
+			nodeBox.rowspacing = Number(StringUtil.trim(node.attribute("rowspacing")));
 		}
-		if(node.attributes["columnspacing"]!=null){
-			nodeBox.columnspacing = Number(StringUtil.trim(node.attributes["columnspacing"]));
+		if(node.attribute("columnspacing")!=""){
+			nodeBox.columnspacing = Number(StringUtil.trim(node.attribute("columnspacing")));
 		}
-		if(node.attributes["framespacing"]!=null){
-			nodeBox.framespacing = Number(StringUtil.trim(node.attributes["framespacing"]));
+		if(node.attribute("framespacing")!=""){
+			nodeBox.framespacing = Number(StringUtil.trim(node.attribute("framespacing")));
 		}
 		
 		return nodeBox;
 	}
 	
 
-	private function loadMTr(node:XMLNode, parentBox:Box):Box{
+	private function loadMTr(node:XML, parentBox:Box):Box{
 		var nodeBox:TrBox = new TrBox(parentBox);
-		for(var i:Number =0; i<node.childNodes.length;i++){
-			if(node.childNodes[i].nodeName!=null){
-				if(node.childNodes[i].nodeName.toLowerCase()=="mtd"){
-					var child:Box = loadNode(node.childNodes[i], nodeBox);
+		for(var i:int =0; i<node.children().length();i++){
+			if(node.children()[i].localName()!=null){
+				if(node.children()[i].localName().toLowerCase()=="mtd"){
+					var child:Box = loadNode(node.children()[i], nodeBox);
 					nodeBox.addTd(child);
 				}
 			}
 		}
-		if(node.attributes["rowalign"]!=null){
-			nodeBox.rowalign = StringUtil.trim(node.attributes["rowalign"]);
+		if(node.attribute("rowalign")!=""){
+			nodeBox.rowalign = StringUtil.trim(node.attribute("rowalign"));
 		}
-		if(node.attributes["columnalign"]!=null){
-			nodeBox.columnalign = StringUtil.trim(node.attributes["columnalign"]);
+		if(node.attribute("columnalign")!=""){
+			nodeBox.columnalign = StringUtil.trim(node.attribute("columnalign"));
 		}
 		return nodeBox;
 	}
 
 
-	private function loadMTd(node:XMLNode, parentBox:Box):Box{
+	private function loadMTd(node:XML, parentBox:Box):Box{
 		var nodeBox:TdBox = new TdBox(parentBox);
-		for(var i:Number =0; i<node.childNodes.length;i++){
-			if(node.childNodes[i].nodeName!=null){
-				var child:Box = loadNode(node.childNodes[i], nodeBox);
+		for(var i:int =0; i<node.children().length();i++){
+			if(node.children()[i].localName()!=null){
+				var child:Box = loadNode(node.children()[i], nodeBox);
 				nodeBox.addChild(child);
 			}
 		}
-		if(node.attributes["rowalign"]!=null){
-			nodeBox.rowalign = StringUtil.trim(node.attributes["rowalign"]);
+		if(node.attribute("rowalign")!=""){
+			nodeBox.rowalign = StringUtil.trim(node.attribute("rowalign"));
 		}
-		if(node.attributes["columnalign"]!=null){
-			nodeBox.columnalign = StringUtil.trim(node.attributes["columnalign"]);
+		if(node.attribute("columnalign")!=""){
+			nodeBox.columnalign = StringUtil.trim(node.attribute("columnalign"));
 		}
-		if(node.attributes["rowspan"]!=null){
-			nodeBox.rowspan = Number(StringUtil.trim(node.attributes["rowspan"]));
+		if(node.attribute("rowspan")!=""){
+			nodeBox.rowspan = Number(StringUtil.trim(node.attribute("rowspan")));
 		}
-		if(node.attributes["columnspan"]!=null){
-			nodeBox.columnspan = Number(StringUtil.trim(node.attributes["columnspan"]));
+		if(node.attribute("columnspan")!=""){
+			nodeBox.columnspan = Number(StringUtil.trim(node.attribute("columnspan")));
 		}
 		return nodeBox;
 	}
 
-	private function loadMfenced(node:XMLNode, parentBox:Box):Box{
+	private function loadMfenced(node:XML, parentBox:Box):Box{
 		var nodeBox:FencedBox = new FencedBox(parentBox);
-		for(var i:Number =0; i<node.childNodes.length;i++){
-			if(node.childNodes[i].nodeName!=null){
-				var child:Box = loadNode(node.childNodes[i], nodeBox);
+		for(var i:int =0; i<node.children().length();i++){
+			if(node.children()[i].localName()!=null){
+				var child:Box = loadNode(node.children()[i], nodeBox);
 				nodeBox.addChild(child);
 			}
 		}
-		if(node.attributes["linethickness"]!=null){
-			nodeBox.linethickness = int(node.attributes["linethickness"]);
+		if(node.attribute("linethickness").length()!=0){
+			nodeBox.linethickness = Number(node.attribute("linethickness"));
 		}
-		if(node.attributes["open"]!=null){
-			nodeBox.open = node.attributes["open"];
+		if(node.attribute("open").length()!=0){
+			nodeBox.open = node.attribute("open");
 		}
-		if(node.attributes["close"]!=null){
-			nodeBox.close = node.attributes["close"];
+		if(node.attribute("close").length()!=0){
+			nodeBox.close = node.attribute("close");
 		}
 		return nodeBox;
 	}
 	
-	private function loadMPhantom(node:XMLNode, parentBox:Box):Box{
+	private function loadMPhantom(node:XML, parentBox:Box):Box{
 		var nodeBox:PhantomBox = new PhantomBox(parentBox);
-		for(var i:Number =0; i<node.childNodes.length;i++){
-			if(node.childNodes[i].nodeName!=null){
-				var child:Box = loadNode(node.childNodes[i], nodeBox);
+		for(var i:int =0; i<node.children().length();i++){
+			if(node.children()[i].localName()!=null){
+				var child:Box = loadNode(node.children()[i], nodeBox);
 				nodeBox.addChild(child);
 			}
 		}
 		return nodeBox;
 	}
 
-	private function loadMError(node:XMLNode, parentBox:Box):Box{
+	private function loadMError(node:XML, parentBox:Box):Box{
 		var nodeBox:ErrorBox = new ErrorBox(parentBox);
-		for(var i:Number =0; i<node.childNodes.length;i++){
-			if(node.childNodes[i].nodeName!=null){
-				var child:Box = loadNode(node.childNodes[i], nodeBox);
+		for(var i:int =0; i<node.children().length();i++){
+			if(node.children()[i].localName()!=null){
+				var child:Box = loadNode(node.children()[i], nodeBox);
 				nodeBox.addChild(child);
 			}
 		}
@@ -242,124 +245,127 @@ class learnmath.mathml.MathML{
 		return nodeBox;
 	}
 
-	private function loadMfrac(node:XMLNode, parentBox:Box):Box{
+	private function loadMfrac(node:XML, parentBox:Box):Box{
 		var nodeBox:FracBox = new FracBox(parentBox);
-		if(node.attributes["linethickness"]!=null){
-			nodeBox.linethickness = int(node.attributes["linethickness"]);
+		if(node.attribute("linethickness").length()!=0){
+			nodeBox.linethickness = Number(node.attribute("linethickness"));
 		}
-		if(node.attributes["bevelled"]!=null){
-			nodeBox.bevelled = node.attributes["bevelled"];
+		if(node.attribute("bevelled").length()!=0){
+			if (node.attribute("bevelled").toString()=="true")
+				nodeBox.bevelled = true;
 		}
-		var numNode = loadNode(node.childNodes[0], nodeBox);
+		var numNode:Box = loadNode(node.children()[0], nodeBox);
 		nodeBox.num = numNode;
-		var denumNode = loadNode(node.childNodes[1], nodeBox);
+		var denumNode:Box = loadNode(node.children()[1], nodeBox);
 		nodeBox.denum = denumNode;
 		return nodeBox;
 	}
 
-	private function loadMSqrt(node:XMLNode, parentBox:Box):Box{
+	private function loadMSqrt(node:XML, parentBox:Box):Box{
 		var nodeBox:SqrtBox = new SqrtBox(parentBox);
-		for(var i:Number =0; i<node.childNodes.length;i++){
-			if(node.childNodes[i].nodeName!=null){
-				var child:Box = loadNode(node.childNodes[i], nodeBox);
+		for(var i:int =0; i<node.children().length();i++){
+			if(node.children()[i].localName()!=null){
+				var child:Box = loadNode(node.children()[i], nodeBox);
 				nodeBox.addChild(child);
 			}
 		}
-		if(node.attributes["linethickness"]!=null){
-			nodeBox.linethickness = int(node.attributes["linethickness"]);
+		if(node.attribute("linethickness")!=""){
+			nodeBox.linethickness = int(node.attribute("linethickness"));
 		}
 		return nodeBox;
 	}
 
-	private function loadMRoot(node:XMLNode, parentBox:Box):Box{
+	private function loadMRoot(node:XML, parentBox:Box):Box{
 		var nodeBox:RootBox = new RootBox(parentBox);
-		var baseNode = loadNode(node.childNodes[0], nodeBox);
+		var baseNode:Box = loadNode(node.children()[0], nodeBox);
 		nodeBox.base = baseNode;
-		var expNode = loadNode(node.childNodes[1], nodeBox);
+		var expNode:Box = loadNode(node.children()[1], nodeBox);
 		nodeBox.index = expNode;
-		if(node.attributes["linethickness"]!=null){
-			nodeBox.linethickness = int(node.attributes["linethickness"]);
+		if(node.attribute("linethickness").length()!=0){
+			nodeBox.linethickness = int(node.attribute("linethickness"));
 		}
 		return nodeBox;
 	}
 	
-	private function loadMSup(node:XMLNode, parentBox:Box):Box{
+	private function loadMSup(node:XML, parentBox:Box):Box{
 		var nodeBox:SupBox = new SupBox(parentBox);
-		var baseNode = loadNode(node.childNodes[0], nodeBox);
+		var baseNode:Box = loadNode(node.children()[0], nodeBox);
 		nodeBox.base = baseNode;
-		var expNode = loadNode(node.childNodes[1], nodeBox);
+		var expNode:Box = loadNode(node.children()[1], nodeBox);
 		nodeBox.exp = expNode;
 		return nodeBox;
 	}
 
-	private function loadMOver(node:XMLNode, parentBox:Box):Box{
+	private function loadMOver(node:XML, parentBox:Box):Box{
 		var nodeBox:OverBox = new OverBox(parentBox);
-		var baseNode = loadNode(node.childNodes[0], nodeBox);
+		var baseNode:Box = loadNode(node.children()[0], nodeBox);
 		nodeBox.base = baseNode;
-		var expNode = loadNode(node.childNodes[1], nodeBox);
+		var expNode:Box = loadNode(node.children()[1], nodeBox);
 		nodeBox.exp = expNode;
 		return nodeBox;
 	}
 	
-	private function loadMSub(node:XMLNode, parentBox:Box):Box{
+	private function loadMSub(node:XML, parentBox:Box):Box{
 		var nodeBox:SubBox = new SubBox(parentBox);
-		var baseNode = loadNode(node.childNodes[0], nodeBox);
+		var baseNode:Box = loadNode(node.children()[0], nodeBox);
 		nodeBox.base = baseNode;
-		var expNode = loadNode(node.childNodes[1], nodeBox);
+		var expNode:Box = loadNode(node.children()[1], nodeBox);
 		nodeBox.sub = expNode;
 		return nodeBox;
 	}
 
-	private function loadMUnder(node:XMLNode, parentBox:Box):Box{
+	private function loadMUnder(node:XML, parentBox:Box):Box{
 		var nodeBox:UnderBox = new UnderBox(parentBox);
-		var baseNode = loadNode(node.childNodes[0], nodeBox);
+		var baseNode:Box = loadNode(node.children()[0], nodeBox);
 		nodeBox.base = baseNode;
-		var expNode = loadNode(node.childNodes[1], nodeBox);
+		var expNode:Box = loadNode(node.children()[1], nodeBox);
 		nodeBox.sub = expNode;
 		return nodeBox;
 	}
 
-	private function loadMSubSup(node:XMLNode, parentBox:Box):Box{
+	private function loadMSubSup(node:XML, parentBox:Box):Box{
 		var nodeBox:SubSupBox = new SubSupBox(parentBox);
-		var baseNode = loadNode(node.childNodes[0], nodeBox);
+		var baseNode:Box = loadNode(node.children()[0], nodeBox);
 		nodeBox.base = baseNode;
-		var subNode = loadNode(node.childNodes[1], nodeBox);
+		var subNode:Box = loadNode(node.children()[1], nodeBox);
 		nodeBox.sub = subNode;
-		var expNode = loadNode(node.childNodes[2], nodeBox);
+		var expNode:Box = loadNode(node.children()[2], nodeBox);
 		nodeBox.exp = expNode;
 		return nodeBox;
 	}
 
-	private function loadMUnderOver(node:XMLNode, parentBox:Box):Box{
+	private function loadMUnderOver(node:XML, parentBox:Box):Box{
 		var nodeBox:UnderOverBox = new UnderOverBox(parentBox);
-		var baseNode = loadNode(node.childNodes[0], nodeBox);
+		var baseNode:Box = loadNode(node.children()[0], nodeBox);
 		nodeBox.base = baseNode;
-		var subNode = loadNode(node.childNodes[1], nodeBox);
+		var subNode:Box = loadNode(node.children()[1], nodeBox);
 		nodeBox.sub = subNode;
-		var expNode = loadNode(node.childNodes[2], nodeBox);
+		var expNode:Box = loadNode(node.children()[2], nodeBox);
 		nodeBox.exp = expNode;
 		return nodeBox;
 	}
 
-	private function loadMi(node:XMLNode, parentBox:Box):Box{
+	private function loadMi(node:XML, parentBox:Box):Box{
 		var nodeBox:IBox = new IBox(parentBox);
-		nodeBox.text = StringUtil.trim(node.childNodes[0].nodeValue);
+		nodeBox.text = StringUtil.trim(node.children()[0].toString());
 		return nodeBox;
 	}
 
-	private function loadMo(node:XMLNode, parentBox:Box):Box{
-		return OBox.getOBox(StringUtil.trim(node.childNodes[0].nodeValue), parentBox);
+	private function loadMo(node:XML, parentBox:Box):Box{
+		return OBox.getOBox(StringUtil.trim(node.children()[0].toString()), parentBox);
 	}
 	
-	private function loadMtext(node:XMLNode, parentBox:Box):Box{
+	private function loadMtext(node:XML, parentBox:Box):Box{
 		var nodeBox:TBox = new TBox(parentBox);
-		nodeBox.text = StringUtil.trim(node.childNodes[0].nodeValue);
+		nodeBox.text = StringUtil.trim(node.children()[0].toString());
 		return nodeBox;
 	}
 
-	private function loadMn(node:XMLNode, parentBox:Box):Box{
+	private function loadMn(node:XML, parentBox:Box):Box{
 		var nodeBox:NBox = new NBox(parentBox);
-		nodeBox.number = StringUtil.trim(node.childNodes[0].nodeValue);
+		nodeBox.number = Number(StringUtil.trim(node.children()[0].toString()));
 		return nodeBox;
 	}
+}
+
 }

@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.token.operators.integrals{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -9,16 +10,17 @@ import learnmath.mathml.formula.token.operators.*;
 import learnmath.mathml.formula.token.operators.integrals.*;
 import learnmath.mathml.formula.script.*;
 import flash.geom.*;
+import flash.display.MovieClip;
 
-class learnmath.mathml.formula.token.operators.integrals.Int2OBox extends IntOBox{
+public class Int2OBox extends IntOBox{
 
-	public function	Int2OBox(parentBox:Box){
+	public function	Int2OBox(parentBox:Box):void{
 		super(parentBox);
 	}
 
 	
-	public function calculate(){
-		var h1 = FontConstant.getHeight(style, "X");
+	override public function calculate():void{
+		var h1:Number = FontConstant.getHeight(style, "X");
 		step = h1/10;
 		finalBounds.width=k*h1 + 2*step;
 		intWidth = k*h1;
@@ -27,13 +29,15 @@ class learnmath.mathml.formula.token.operators.integrals.Int2OBox extends IntOBo
 		ResizeBox.addBox(this);
 	}
 	
-	public function draw(graph:MovieClip){
+	override public function draw(graph:MovieClip):void{
 		drawIntegral(graph, finalBounds.x, finalBounds.y, finalBounds.width-2*step, finalBounds.height)
 		drawIntegral(graph, finalBounds.x+ step, finalBounds.y, finalBounds.width-2*step, finalBounds.height)
 		drawIntegral(graph, finalBounds.x+ 2*step, finalBounds.y, finalBounds.width-2*step, finalBounds.height)
 	}
 
-	public function toString():String{
+	override public function toString():String{
 		return "Int2OBox";
 	}
+}
+
 }

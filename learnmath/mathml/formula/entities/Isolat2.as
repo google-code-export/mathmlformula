@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.entities{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -5,15 +6,15 @@
 ---------------------------------------------------------------*/
 import learnmath.mathml.formula.entities.*;
 
-class learnmath.mathml.formula.entities.Isolat2 extends EntityGroup{
+public class Isolat2 extends EntityGroup{
 	
 	//Non-Russian Cyrillic for MathML 2.0
 	
-	public function getEntities(){
+	override public function getEntities():String{
 		return allCodes;
 	}
 
-static var allCodes = "<! Abreve           &#x00102; >" + 
+private static var allCodes:String = "<! Abreve           &#x00102; >" + 
 "<! abreve           &#x00103; >" + 
 "<! Amacr            &#x00100; >" + 
 "<! amacr            &#x00101; >" + 
@@ -134,4 +135,6 @@ static var allCodes = "<! Abreve           &#x00102; >" +
 "<! zcaron           &#x0017E; >" + 
 "<! Zdot             &#x0017B; >" + 
 "<! zdot             &#x0017C; >";
+}
+
 }

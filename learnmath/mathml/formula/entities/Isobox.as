@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.entities{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -5,15 +6,15 @@
 ---------------------------------------------------------------*/
 import learnmath.mathml.formula.entities.*;
 
-class learnmath.mathml.formula.entities.Isobox extends EntityGroup{
+public class Isobox extends EntityGroup{
 	
 	//Box and Line Drawing for MathML 2.0
 	
-	public function getEntities(){
+	override public function getEntities():String{
 		return allCodes;
 	}
 
-static var allCodes = "<! boxDL            &#x02557; >" + 
+private static var allCodes:String = "<! boxDL            &#x02557; >" + 
 "<! boxDl            &#x02556; >" + 
 "<! boxdL            &#x02555; >" + 
 "<! boxdl            &#x02510; >" + 
@@ -53,4 +54,6 @@ static var allCodes = "<! boxDL            &#x02557; >" +
 "<! boxVr            &#x0255F; >" + 
 "<! boxvR            &#x0255E; >" + 
 "<! boxvr            &#x0251C; >";
+}
+
 }

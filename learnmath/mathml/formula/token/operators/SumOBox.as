@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.token.operators{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -6,73 +7,76 @@
 import learnmath.mathml.formula.*;
 import learnmath.mathml.formula.token.*;
 import flash.geom.*;
+import flash.display.MovieClip;
 
-class learnmath.mathml.formula.token.operators.SumOBox extends OBox{
+public class SumOBox extends OBox{
 
-	var addSize:Number = 3;
-	var k:Number = 20/45;
-	var l:Number = 1/50;
+	private var addSize:Number = 3;
+	private var k:Number = 20./45;
+	private var l:Number = 1./50;
 
-	public function	SumOBox(parentBox:Box){
+	public function	SumOBox(parentBox:Box):void{
 		super(parentBox);
 	}
 
 	
-	public function calculate(){
-		var h = FontConstant.getHeight(style, "X");
+	override public function calculate():void{
+		var h:Number = FontConstant.getHeight(style, "X");
 		finalBounds.width=k*h;
 		finalBounds.height=h;
 		finalBounds.y=finalBounds.y-finalBounds.height/2;
 		ResizeBox.addBox(this);
 	}
 	
-	public function changeSizeFromParent(){
+	override public function changeSizeFromParent():void{
 		resizeFromParent();
 	}
 	
-	public function copyParentStyle(_styleParent:Style){
+	override public function copyParentStyle(_styleParent:Style):void{
 		super.copyParentStyle(_styleParent);
 		this.style.size = this.style.size + addSize;
 	}
 	
-	public function draw(graph:MovieClip){
-		var h = finalBounds.height;
-		var w = finalBounds.width
-		var d = l*h;
+	override public function draw(graph:MovieClip):void{
+		var h:Number = finalBounds.height;
+		var w:Number = finalBounds.width
+		var d:Number = l*h;
 		if(d<1){
 			d=1;
 		}
-		var h1 = h/6;
-		var g = 3*d;
+		var h1:Number = h/6;
+		var g:Number = 3*d;
 		
-		graph.lineStyle(1, getHexColor(), 100);
+		graph.graphics.lineStyle(1, getHexColor(), 100);
 
-		graph.beginFill(getHexColor());
+		graph.graphics.beginFill(getHexColor());
 
-		graph.moveTo(finalBounds.x+w, finalBounds.y + g+ h1);
-		graph.lineTo(finalBounds.x+w, finalBounds.y + g);
-		graph.lineTo(finalBounds.x, finalBounds.y + g);
-		graph.lineTo(finalBounds.x+w/2+d*0.7, finalBounds.y+h/2 + g);
-		graph.lineTo(finalBounds.x, finalBounds.y+h);
-		graph.lineTo(finalBounds.x+w, finalBounds.y+h);
-		graph.lineTo(finalBounds.x+w, finalBounds.y+h-h1);
+		graph.graphics.moveTo(finalBounds.x+w, finalBounds.y + g+ h1);
+		graph.graphics.lineTo(finalBounds.x+w, finalBounds.y + g);
+		graph.graphics.lineTo(finalBounds.x, finalBounds.y + g);
+		graph.graphics.lineTo(finalBounds.x+w/2+d*0.7, finalBounds.y+h/2 + g);
+		graph.graphics.lineTo(finalBounds.x, finalBounds.y+h);
+		graph.graphics.lineTo(finalBounds.x+w, finalBounds.y+h);
+		graph.graphics.lineTo(finalBounds.x+w, finalBounds.y+h-h1);
 		
-		graph.lineTo(finalBounds.x+w-g, finalBounds.y+h-g);
-		graph.lineTo(finalBounds.x+g, finalBounds.y+h-g);
-		graph.lineTo(finalBounds.x+w/2+g, finalBounds.y+h/2);
-		graph.lineTo(finalBounds.x+g, finalBounds.y + d + g);
-		graph.lineTo(finalBounds.x+w-g, finalBounds.y+d + g);
-		graph.moveTo(finalBounds.x+w, finalBounds.y + h1 + g);
+		graph.graphics.lineTo(finalBounds.x+w-g, finalBounds.y+h-g);
+		graph.graphics.lineTo(finalBounds.x+g, finalBounds.y+h-g);
+		graph.graphics.lineTo(finalBounds.x+w/2+g, finalBounds.y+h/2);
+		graph.graphics.lineTo(finalBounds.x+g, finalBounds.y + d + g);
+		graph.graphics.lineTo(finalBounds.x+w-g, finalBounds.y+d + g);
+		graph.graphics.moveTo(finalBounds.x+w, finalBounds.y + h1 + g);
 		
 
-		graph.endFill();		
+		graph.graphics.endFill();		
 		
 		
 		
 	}
 	
-	public function toString():String{
+	override public function toString():String{
 		return "SumOBox";
 	}
 	
+}
+
 }

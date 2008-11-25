@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.entities{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -5,21 +6,21 @@
 ---------------------------------------------------------------*/
 import learnmath.mathml.formula.entities.*;
 
-class learnmath.mathml.formula.entities.EntityGroup{
+public class EntityGroup{
 	
-	public function getEntities(){
+	public function getEntities():String{
 		return "";
 	}
 
 	public function getAllCodes():Array{
-		var allCodes = getEntities();
+		var allCodes:String = getEntities();
 		var list:Array = new Array();
 		
-		var search = "<! ";
-		var index = allCodes.indexOf(search);
+		var search:String = "<! ";
+		var index:Number = allCodes.indexOf(search);
 		while(index>-1){
 			index = index + 3;
-			var code = allCodes.substring(index, allCodes.indexOf(" ", index));
+			var code:String = allCodes.substring(index, allCodes.indexOf(" ", index));
 			list[list.length] = code;
 			
 			index = allCodes.indexOf(search, index);
@@ -29,14 +30,14 @@ class learnmath.mathml.formula.entities.EntityGroup{
 	}
 
 	public function getAllUnicodes():Array{
-		var allCodes = getEntities();
+		var allCodes:String = getEntities();
 		var list:Array = new Array();
 		
-		var search = " &#x";
-		var index = allCodes.indexOf(search);
+		var search:String = " &#x";
+		var index:Number = allCodes.indexOf(search);
 		while(index>-1){
 			index = index + 1;
-			var unicode = allCodes.substring(index, allCodes.indexOf(" ", index));
+			var unicode:String = allCodes.substring(index, allCodes.indexOf(" ", index));
 			list[list.length] = unicode;
 			
 			index = allCodes.indexOf(search, index + 1);
@@ -47,46 +48,48 @@ class learnmath.mathml.formula.entities.EntityGroup{
 
 	// Ex:unicode = &#x02AEF;
 	public function getCode(unicode:String):String{
-		if(unicode==null) return null;
-		var allCodes = getEntities();
-		var index:Number = allCodes.indexOf(unicode);	
+		if(unicode=="") return "";
+		var allCodes:String = getEntities();
+		var index:int = allCodes.indexOf(unicode);	
 		if(index>-1){
-			var firstIndex = allCodes.lastIndexOf("<!", index) + 3;	
-			var code = allCodes.substring(firstIndex, allCodes.indexOf(" ", firstIndex));
+			var firstIndex:int = allCodes.lastIndexOf("<!", index) + 3;	
+			var code:String = allCodes.substring(firstIndex, allCodes.indexOf(" ", firstIndex));
 			return "&" + code + ";";
 		}
-		return null;
+		return "";
 	}
 
 	// Ex:code = &code;
 	public function getUnicode(code:String):String{
-		if(code==null) return null;
+		if(code=="") return "";
 		
-		var allCodes = getEntities();
-		var search = "<! " + code.substring(1, code.length-1) + " ";
-		var index:Number = allCodes.indexOf(search);	
+		var allCodes:String = getEntities();
+		var search:String = "<! " + code.substring(1, code.length-1) + " ";
+		var index:int = allCodes.indexOf(search);	
 		if(index>-1){
-			var firstIndex = allCodes.indexOf("&#x", index);	
-			var unicode = allCodes.substring(firstIndex, allCodes.indexOf(" ", firstIndex));
+			var firstIndex:int = allCodes.indexOf("&#x", index);	
+			var unicode:String = allCodes.substring(firstIndex, allCodes.indexOf(" ", firstIndex));
 			return unicode;
 		}
-		return null;
+		return "";
 	}
 
 	public function getChar(code:String):String{
 		var unicode:String = getUnicode(code);
-		if(unicode==null) return null;
+		if(unicode=="") return "";
 		
 		if(unicode.indexOf(";&#x")>-1){
-			var index = unicode.indexOf(";&#x");
+			var index:int = unicode.indexOf(";&#x");
 			var letter1:Number = Number(new Number("0x" + unicode.substring(3, index)).toString(10));
 			var letter2:Number = Number(new Number("0x" + unicode.substring(index+4, unicode.length-1)).toString(10));
-			var s = String.fromCharCode( letter1 ) + String.fromCharCode( letter2 );
+			var s:String = String.fromCharCode( letter1 ) + String.fromCharCode( letter2 );
 			return s;
 		}else{
 			var letter:Number = Number(new Number("0x" + unicode.substring(3, unicode.length-1)).toString(10));
 			return String.fromCharCode( letter );
 		}
 	}
+
+}
 
 }

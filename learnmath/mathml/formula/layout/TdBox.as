@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.layout{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -5,32 +6,33 @@
 ---------------------------------------------------------------*/
 import learnmath.mathml.formula.*;
 import flash.geom.*;
+import flash.display.MovieClip;
 
-class learnmath.mathml.formula.layout.TdBox extends Box{
+public class TdBox extends Box{
 	
-	var children:Array;
-	var rowalign:String = "";			//(top | bottom | center)
-	var columnalign:String = ""; 		//(left | center | right)
-	var rowspan:Number = 1;
-	var columnspan:Number = 1;
+	//private var children:Array;
+	public var rowalign:String = "";			//(top | bottom | center)
+	public var columnalign:String = ""; 		//(left | center | right)
+	public var rowspan:Number = 1;
+	public var columnspan:Number = 1;
 	
 		
-	public function	TdBox(parentBox:Box){
+	public function	TdBox(parentBox:Box):void{
 		super(parentBox);
 		children = new Array();
 	}
 	
-	public function addChild(newBox:Box){
+	public function addChild(newBox:Box):void{
 		children[children.length] = newBox;
 	}
 	
 
-	public function calculate(){
-		var childx = 0;
-		for(var i:Number =0; i<children.length;i++){
+	override public function calculate():void{
+		var childx:Number = 0;
+		for(var i:int =0; i<children.length;i++){
 			var child:Box = children[i];
 			
-			var cP = new Point();
+			var cP:Point = new Point();
 			cP.x = originPoint.x + childx;
 			cP.y = originPoint.y;
 			child.calculateBox(cP);
@@ -41,10 +43,10 @@ class learnmath.mathml.formula.layout.TdBox extends Box{
 		finalBounds.width=0;
 		finalBounds.height=0;
 		finalBounds.y = children[0].finalBounds.y;
-		var minYPoint = children[0].finalBounds.y
+		var minYPoint:Number = children[0].finalBounds.y
 		
-		for(var i:Number =0; i<children.length;i++){
-			var child:Box = children[i];
+		for(i =0; i<children.length;i++){
+			child = children[i];
 			
 			finalBounds.width = finalBounds.width + child.finalBounds.width;
 			if((child.finalBounds.y + child.finalBounds.height)>minYPoint){
@@ -60,12 +62,12 @@ class learnmath.mathml.formula.layout.TdBox extends Box{
 	}
 
 
-	public function moveMyChildren(){
-		var childx = 0;
-		for(var i:Number =0; i<children.length;i++){
+	override public function moveMyChildren():void{
+		var childx:Number = 0;
+		for(var i:int =0; i<children.length;i++){
 			var child:Box = children[i];
 			
-			var cP = new Point();
+			var cP:Point = new Point();
 			cP.x = originPoint.x + childx;
 			cP.y = originPoint.y;
 			
@@ -74,26 +76,26 @@ class learnmath.mathml.formula.layout.TdBox extends Box{
 		}
 	}
 	
-	public function copyParentStyle(_styleParent:Style){
+	override public function copyParentStyle(_styleParent:Style):void{
 		super.copyParentStyle(_styleParent);
-		for(var i:Number =0; i<children.length;i++){
+		for(var i:int =0; i<children.length;i++){
 			var child:Box = children[i];
 			child.copyParentStyle(this.style);
 		}
 	}
 	
 	
-	public function draw(graph:MovieClip){
-		for(var i:Number =0; i<children.length;i++){
+	override public function draw(graph:MovieClip):void{
+		for(var i:int =0; i<children.length;i++){
 			var child:Box = children[i];
 			child.drawBox(graph);
 		}
 		//DrawFormula.drawRectangle(graph, finalBounds);
 	}
 	
-	public function toString():String{
-		var s = "TdBox "+finalBounds+" [";
-		for(var i:Number =0; i<children.length;i++){
+	override public function toString():String{
+		var s:String = "TdBox "+finalBounds+" [";
+		for(var i:int =0; i<children.length;i++){
 			var child:Box = children[i];
 			s = s + child.toString() ;
 			if((i+1)!=children.length){
@@ -105,4 +107,6 @@ class learnmath.mathml.formula.layout.TdBox extends Box{
 	}
 	
 	
+}
+
 }

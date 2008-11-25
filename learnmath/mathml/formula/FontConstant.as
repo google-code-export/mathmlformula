@@ -1,34 +1,37 @@
+package learnmath.mathml.formula{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
 	Site: www.learn-math.info
 ---------------------------------------------------------------*/
+import flash.text.TextField;
 import learnmath.mathml.formula.*;
+import flash.text.TextFormat;
 
-class learnmath.mathml.formula.FontConstant{
+public class FontConstant{
 	
-	static var fontSize;
-	static var startWidthSize:Number = 6;
-	static var fontSizeFactor = 1.1;
+	public static var fontSize:Array;
+	public static var startWidthSize:Number = 6;
+	public static var fontSizeFactor:Number = 1.1;
 		
-	static function init(){
+	public static function init():void{
 		if(fontSize==null){
 			fontSize = new Array();
 			fontSize[0] = startWidthSize;
 			
-			for(var i=1;i<40; i++){
+			for(var i:int=1;i<40; i++){
 				fontSize[i]= fontSize[i-1]*fontSizeFactor;
-				fontSize[i-1] = int(fontSize[i-1]);
+				fontSize[i-1] = Number(fontSize[i-1]);
 				//trace(i + " - " + fontSize[i-1]);
 			}
-			fontSize[fontSize.length-1] = int(fontSize[fontSize.length-1]);
+			fontSize[fontSize.length-1] = Number(fontSize[fontSize.length-1]);
 			
 		}
 	}
 
-	static function getTextFormat(style:Style):TextFormat{
+	public static function getTextFormat(style:Style):TextFormat{
 		init();
-		var tf = new TextFormat();
+		var tf:TextFormat = new TextFormat();
 		tf.font=style.font; // _sans; _serif; _typewriter
 		if(style.fontweight=='bold'){
 			tf.bold = true;
@@ -41,19 +44,33 @@ class learnmath.mathml.formula.FontConstant{
 		return tf;
 	}
 
-	static function getWidth(style:Style, text:String):Number{
+	public static function getWidth(style:Style, text:String):Number{
 		init();
-		return getTextFormat(style).getTextExtent(text).textFieldWidth;
+		var tfield:TextField = new TextField();
+		tfield.defaultTextFormat = getTextFormat(style);
+		tfield.text = text;
+		return tfield.getLineMetrics(0).width + 4;
+		//return getTextFormat(style).getTextExtent(text).textFieldWidth;
 	}
 	
-	static function getHeight(style:Style, text:String):Number{
+	public static function getHeight(style:Style, text:String):Number{
 		init();
-		return getTextFormat(style).getTextExtent(text).textFieldHeight;
+		var tfield:TextField = new TextField();
+		tfield.defaultTextFormat = getTextFormat(style);
+		tfield.text = text;
+		return tfield.getLineMetrics(0).height+4;
+		//return getTextFormat(style).getTextExtent(text).textFieldHeight;
 	}
 
-	static function getAscent(style:Style, text:String):Number{
+	public static function getAscent(style:Style, text:String):Number{
 		init();
-		return getTextFormat(style).getTextExtent(text).ascent;
+		var tfield:TextField = new TextField();
+		tfield.defaultTextFormat = getTextFormat(style);
+		tfield.text = text;
+		return tfield.getLineMetrics(0).ascent;
+		//return getTextFormat(style).getTextExtent(text).ascent;
 	}
+
+}
 
 }

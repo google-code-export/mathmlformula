@@ -1,3 +1,4 @@
+﻿package learnmath.mathml.formula.layout{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -6,52 +7,53 @@
 import learnmath.mathml.formula.*;
 import learnmath.mathml.formula.layout.*;
 import flash.geom.*;
+import flash.display.MovieClip;
 
-class learnmath.mathml.formula.layout.TableBox extends Box{
+public class TableBox extends Box{
 	
-	var children:Array;
-	var rowalign:String = "";			// (top | bottom | center) 
-	var columnalign:String = ""; 			// (left | center | right)
-	var rowspacing:Number = -1;			// exact units or -1 default
-	var columnspacing:Number = -1;			// exact units or -1 default
-	var framespacing:Number = -1;			// exact units or -1 default
+	//private var children:Array;
+	public var rowalign:String = "";			// (top | bottom | center) 
+	public var columnalign:String = ""; 			// (left | center | right)
+	public var rowspacing:Number = -1;			// exact units or -1 default
+	public var columnspacing:Number = -1;			// exact units or -1 default
+	public var framespacing:Number = -1;			// exact units or -1 default
 	
-	var childrenWidth:Array;
-	var finalColumnWidth:Array;
+	private var childrenWidth:Array;
+	private var finalColumnWidth:Array;
 		
-	public function	TableBox(parentBox:Box){
+	public function	TableBox(parentBox:Box):void{
 		super(parentBox);
 		children = new Array();
 		childrenWidth = new Array();
 	}
 	
-	public function addRow(newBox:Box){
+	public function addRow(newBox:Box):void{
 		children[children.length] = newBox;
 	}
 	
 
-	public function calculate(){
-		for(var i:Number =0; i<children.length;i++){
+	override public function calculate():void{
+		for(var i:int =0; i<children.length;i++){
 			var child:Box = children[i];
-			var cP = new Point();
+			var cP:Point = new Point();
 			child.calculateBox(cP);
-			
+
 			var trBox:TrBox = TrBox(child);
 			childrenWidth[childrenWidth.length] = trBox.getChildrenWidth();
 		}
-		
+
 		calculateMaxColumnWidth();
-		for(var i:Number =0; i<children.length;i++){
-			var child:Box = children[i];
-			var trBox:TrBox = TrBox(child);
+		for(i =0; i<children.length;i++){
+			child = children[i];
+			trBox = TrBox(child);
 			trBox.setFinalColumnWidth(finalColumnWidth);
 		}
 		
 		finalBounds.width=0;
 		finalBounds.height=2*getFramespacing();
 		
-		for(var i:Number =0; i<children.length;i++){
-			var child:Box = children[i];
+		for(i =0; i<children.length;i++){
+			child = children[i];
 			finalBounds.height = finalBounds.height + child.finalBounds.height;
 			if(i<(children.length-1)){
 				finalBounds.height = finalBounds.height + getRowspacing();
@@ -66,12 +68,12 @@ class learnmath.mathml.formula.layout.TableBox extends Box{
 	}
 
 
-	public function moveMyChildren(){
-		var childy = finalBounds.y + getFramespacing();
-		for(var i:Number =0; i<children.length;i++){
+	override public function moveMyChildren():void{
+		var childy:Number = finalBounds.y + getFramespacing();
+		for(var i:int =0; i<children.length;i++){
 			var child:Box = children[i];
 
-			var cP = new Point();
+			var cP:Point = new Point();
 			cP.x = originPoint.x + getFramespacing();
 			cP.y = childy + child.finalBounds.height/2;
 
@@ -82,7 +84,7 @@ class learnmath.mathml.formula.layout.TableBox extends Box{
 	
 	public function getRowspacing():Number{
 		if(rowspacing==-1){
-			var h = FontConstant.getHeight(style, "X");
+			var h:Number = FontConstant.getHeight(style, "X");
 			return 0.5*h;
 		}
 		return rowspacing;
@@ -91,18 +93,18 @@ class learnmath.mathml.formula.layout.TableBox extends Box{
 
 	public function getFramespacing():Number{
 		if(framespacing==-1){
-			var w = FontConstant.getWidth(style, "X");
+			var w:Number = FontConstant.getWidth(style, "X");
 			return 0.2*w;
 		}
 		return framespacing;
 	}
 	
 
-	public function calculateMaxColumnWidth(){
+	public function calculateMaxColumnWidth():void{
 		finalColumnWidth = childrenWidth[0];
-		for(var i:Number =1; i<childrenWidth.length;i++){
-			var childrenW = childrenWidth[i];
-			for(var j:Number =0; j<childrenWidth.length;j++){
+		for(var i:int =1; i<childrenWidth.length;i++){
+			var childrenW:Array = childrenWidth[i];
+			for(var j:int =0; j<childrenWidth.length;j++){
 				finalColumnWidth[j] = Math.max(finalColumnWidth[j], childrenW[j]);
 			}
 			
@@ -110,9 +112,9 @@ class learnmath.mathml.formula.layout.TableBox extends Box{
 	}
 
 
-	public function copyParentStyle(_styleParent:Style){
+	override public function copyParentStyle(_styleParent:Style):void{
 		super.copyParentStyle(_styleParent);
-		for(var i:Number =0; i<children.length;i++){
+		for(var i:int =0; i<children.length;i++){
 			var child:Box = children[i];
 						
 			var trBox:TrBox = TrBox(child);
@@ -125,17 +127,17 @@ class learnmath.mathml.formula.layout.TableBox extends Box{
 	}
 	
 	
-	public function draw(graph:MovieClip){
-		for(var i:Number =0; i<children.length;i++){
+	override public function draw(graph:MovieClip):void{
+		for(var i:int =0; i<children.length;i++){
 			var child:Box = children[i];
 			child.drawBox(graph);
 		}
 		//DrawFormula.drawRectangle(graph, finalBounds);
 	}
 	
-	public function toString():String{
-		var s = "TableBox "+finalBounds+" [";
-		for(var i:Number =0; i<children.length;i++){
+	override public function toString():String{
+		var s:String = "TableBox "+finalBounds+" [";
+		for(var i:int =0; i<children.length;i++){
 			var child:Box = children[i];
 			s = s + child.toString() ;
 			if((i+1)!=children.length){
@@ -147,4 +149,6 @@ class learnmath.mathml.formula.layout.TableBox extends Box{
 	}
 	
 	
+}
+
 }

@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.entities{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -5,15 +6,15 @@
 ---------------------------------------------------------------*/
 import learnmath.mathml.formula.entities.*;
 
-class learnmath.mathml.formula.entities.Isoamsr extends EntityGroup{
+public class Isoamsr extends EntityGroup{
 	
 	//Added Math Symbols: Relations for MathML 2.0
 	
-	public function getEntities(){
+	override public function getEntities():String{
 		return allCodes;
 	}
 
-static var allCodes = "<! apE              &#x02A70; >" + 
+private static var allCodes:String = "<! apE              &#x02A70; >" + 
 "<! ape              &#x0224A; >" + 
 "<! apid             &#x0224B; >" + 
 "<! asymp            &#x02248; >" + 
@@ -193,4 +194,6 @@ static var allCodes = "<! apE              &#x02A70; >" +
 "<! vprop            &#x0221D; >" + 
 "<! vrtri            &#x022B3; >" + 
 "<! Vvdash           &#x022AA; >";
+}
+
 }

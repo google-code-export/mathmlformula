@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.entities{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -5,15 +6,15 @@
 ---------------------------------------------------------------*/
 import learnmath.mathml.formula.entities.*;
 
-class learnmath.mathml.formula.entities.Isopub extends EntityGroup{
+public class Isopub extends EntityGroup{
 	
 	//Publishing for MathML 2.0
 	
-	public function getEntities(){
+	override public function getEntities():String{
 		return allCodes;
 	}
 
-static var allCodes = "<! blank            &#x02423; >" + 
+private static var allCodes:String = "<! blank            &#x02423; >" + 
 "<! blk12            &#x02592; >" + 
 "<! blk14            &#x02591; >" + 
 "<! blk34            &#x02593; >" + 
@@ -97,4 +98,6 @@ static var allCodes = "<! blank            &#x02423; >" +
 "<! utri             &#x025B5; >" + 
 "<! utrif            &#x025B4; >" + 
 "<! vellip           &#x022EE; >";
+}
+
 }

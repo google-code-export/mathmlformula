@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.token{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -10,21 +11,22 @@ import learnmath.mathml.formula.token.operators.integrals.*;
 import learnmath.mathml.formula.token.operators.arrows.*;
 import learnmath.mathml.formula.token.operators.normal.*;
 import flash.geom.*;
+import flash.display.MovieClip;
 
-class learnmath.mathml.formula.token.OBox extends TokenBox{
-	var text:String = "";
+public class OBox extends TokenBox{
+	protected var text:String = "";
 
-	public function	OBox(parentBox:Box){
+	public function	OBox(parentBox:Box):void{
 		super(parentBox);
 	}
 
-	public function calculate(){
+	override public function calculate():void{
 		DrawFormula.calculateText(finalBounds, text, style);
 		finalBounds.y = finalBounds.y - finalBounds.height/2;
 	}
 	
 	
-	public function draw(graph:MovieClip){
+	override public function draw(graph:MovieClip):void{
 		var s:Point = new Point();
 		s.x = originPoint.x;
 		s.y = originPoint.y - finalBounds.height/2;
@@ -76,15 +78,15 @@ class learnmath.mathml.formula.token.OBox extends TokenBox{
 		}else if(text=='&tprime;'){
 			return new PrimeOBox(parentBox, 3);
 		}else if(text=='&dot;'){
-			var box =  new OBox(parentBox);
+			var box:OBox =  new OBox(parentBox);
 			box.text = "\u2022";
 			return box;
 		}else if(text=='&ddot;'){
-			var box =  new OBox(parentBox);
+			box =  new OBox(parentBox);
 			box.text = "\u2022\u2022";
 			return box;
 		}else if(text=='&TripleDot;'){
-			var box =  new OBox(parentBox);
+			box =  new OBox(parentBox);
 			box.text = "\u2022\u2022\u2022";
 			return box;
 		}else if(text=='&OverBar;'){
@@ -131,10 +133,12 @@ class learnmath.mathml.formula.token.OBox extends TokenBox{
 		}else if(text=='&Ll;'){
 			return new LlOBox(parentBox);
 		}
-		var newObox =  new OBox(parentBox);
+		var newObox:OBox =  new OBox(parentBox);
 		newObox.text = EntityManager.replaceAllCode(text);
 		return newObox;
 	}
 	
 	
+}
+
 }

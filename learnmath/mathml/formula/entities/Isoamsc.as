@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.entities{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -5,15 +6,15 @@
 ---------------------------------------------------------------*/
 import learnmath.mathml.formula.entities.*;
 
-class learnmath.mathml.formula.entities.Isoamsc extends EntityGroup{
+public class Isoamsc extends EntityGroup{
 	
 	//Added Math Symbols: Delimiters for MathML 2.0
 	
-	public function getEntities(){
+	override public function getEntities():String{
 		return allCodes;
 	}
 
-static var allCodes = "<! dlcorn           &#x0231E; >" + 
+private static var allCodes:String = "<! dlcorn           &#x0231E; >" + 
 "<! drcorn           &#x0231F; >" + 
 "<! gtlPar           &#x02995; >" + 
 "<! langd            &#x02991; >" + 
@@ -35,5 +36,7 @@ static var allCodes = "<! dlcorn           &#x0231E; >" +
 "<! rpargt           &#x02994; >" + 
 "<! ulcorn           &#x0231C; >" + 
 "<! urcorn           &#x0231D; >";
+
+}
 
 }

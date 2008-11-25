@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.layout{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -6,29 +7,30 @@
 import learnmath.mathml.formula.*;
 import learnmath.mathml.formula.layout.*;
 import flash.geom.*;
+import flash.display.MovieClip;
 
-class learnmath.mathml.formula.layout.RootBox extends Box{
+public class RootBox extends Box{
 	
-	var base:Box;
-	var index:Box;
+	public var base:Box;
+	public var index:Box;
 	
-	var linethickness = 1;
-	var kLine:Number = 6/100;		
+	public var linethickness:Number = 1;
+	private var kLine:Number = 0.06;		
 	
-	var widthR = 3;
-	var kWR:Number = 17/100;		
+	private var widthR:Number = 3;
+	private var kWR:Number = 0.17;		
 	
-	public function	RootBox(parentBox:Box){
+	public function	RootBox(parentBox:Box):void{
 		super(parentBox);
 	}
 	
-	public function calculate(){
-		var cP = new Point();
+	override public function calculate():void{
+		var cP:Point = new Point();
 		cP.x = originPoint.x;
 		cP.y = originPoint.y;
 		base.calculateBox(cP);
 
-		var cI = new Point();
+		var cI:Point = new Point();
 		cI.x = originPoint.x;
 		cI.y = originPoint.y - base.finalBounds.height/4 ;
 		index.calculateBox(cI);
@@ -47,42 +49,44 @@ class learnmath.mathml.formula.layout.RootBox extends Box{
 		moveMyChildren();
 	}
 
-	public function moveMyChildren(){
-		var cP = new Point();
+	override public function moveMyChildren():void{
+		var cP:Point = new Point();
 		cP.x = originPoint.x + index.finalBounds.width + widthR*1/2;
 		cP.y = originPoint.y;
 		base.moveOriginTo(cP);
 			
-		var cI = new Point();
+		var cI:Point = new Point();
 		cI.x = originPoint.x;
 		cI.y = originPoint.y - base.finalBounds.height/4 ;
 		index.moveOriginTo(cI);
 	}
 
 	
-	public function copyParentStyle(_styleParent:Style){
+	override public function copyParentStyle(_styleParent:Style):void{
 		super.copyParentStyle(_styleParent);
 		
 		base.copyParentStyle(this.style);
-		var newStyle = this.style.getCopy();
+		var newStyle:Style = this.style.getCopy();
 		newStyle.size = newStyle.size-3;
 		index.copyParentStyle(newStyle);
 	}
 	
 	
-	public function draw(graph:MovieClip){
-		var s = getTinethickness(linethickness, kLine);
-		graph.lineStyle(s, getHexColor(), 100);
-		graph.moveTo(base.finalBounds.x-widthR, base.finalBounds.y + 2*widthR);
-		graph.lineTo(base.finalBounds.x-widthR/2, base.finalBounds.y + base.finalBounds.height);
-		graph.lineTo(base.finalBounds.x, base.finalBounds.y + s/2);
-		graph.lineTo(base.finalBounds.x + base.finalBounds.width, base.finalBounds.y + s/2);
+	override public function draw(graph:MovieClip):void{
+		var s:Number = getTinethickness(linethickness, kLine);
+		graph.graphics.lineStyle(s, getHexColor(), 100);
+		graph.graphics.moveTo(base.finalBounds.x-widthR, base.finalBounds.y + 2*widthR);
+		graph.graphics.lineTo(base.finalBounds.x-widthR/2, base.finalBounds.y + base.finalBounds.height);
+		graph.graphics.lineTo(base.finalBounds.x, base.finalBounds.y + s/2);
+		graph.graphics.lineTo(base.finalBounds.x + base.finalBounds.width, base.finalBounds.y + s/2);
 
 		base.draw(graph);
 		index.drawBox(graph);
 	}
 	
-	public function toString():String{
+	override public function toString():String{
 		return "RootBox";
 	}
+}
+
 }

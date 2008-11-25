@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.entities{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -5,15 +6,15 @@
 ---------------------------------------------------------------*/
 import learnmath.mathml.formula.entities.*;
 
-class learnmath.mathml.formula.entities.Isogrk3 extends EntityGroup{
+public class Isogrk3 extends EntityGroup{
 	
 	//Greek Symbols for MathML 2.0
 	
-	public function getEntities(){
+	override public function getEntities():String{
 		return allCodes;
 	}
 
-static var allCodes = "<! alpha            &#x003B1; >" + 
+private static var allCodes:String = "<! alpha            &#x003B1; >" + 
 "<! beta             &#x003B2; >" + 
 "<! chi              &#x003C7; >" + 
 "<! Delta            &#x00394; >" + 
@@ -56,4 +57,6 @@ static var allCodes = "<! alpha            &#x003B1; >" +
 "<! Xi               &#x0039E; >" + 
 "<! xi               &#x003BE; >" + 
 "<! zeta             &#x003B6; >";
+}
+
 }

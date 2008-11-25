@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.token.operators.arrows{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -6,13 +7,14 @@
 import learnmath.mathml.formula.*;
 import learnmath.mathml.formula.token.*;
 import flash.geom.*;
+import flash.display.MovieClip;
 
-class learnmath.mathml.formula.token.operators.arrows.PrimeOBox extends OBox{
+public class PrimeOBox extends OBox{
 
-	var k:Number = 3/100;
-	var l:Number = 1/10;
-	var num:Number = 1;
-	var step:Number = 1;
+	private var k:Number = 0.03;
+	private var l:Number = 0.1;
+	private var num:Number = 1;
+	private var step:Number = 1;
 
 	public function	PrimeOBox(parentBox:Box, n:Number){
 		super(parentBox);
@@ -20,10 +22,10 @@ class learnmath.mathml.formula.token.operators.arrows.PrimeOBox extends OBox{
 	}
 
 	
-	public function calculate(){
+	override public function calculate():void{
 		DrawFormula.calculateText(finalBounds, text, style);
-		var h1 = FontConstant.getHeight(style, "X");
-		var w1 = FontConstant.getWidth(style, "X");
+		var h1:Number = FontConstant.getHeight(style, "X");
+		var w1:Number = FontConstant.getWidth(style, "X");
 		
 		step = w1/3;
 		finalBounds.width=num*step;
@@ -31,29 +33,31 @@ class learnmath.mathml.formula.token.operators.arrows.PrimeOBox extends OBox{
 		finalBounds.y = finalBounds.y - h1/2
 	}
 	
-	public function copyParentStyle(_styleParent:Style){
+	override public function copyParentStyle(_styleParent:Style):void{
 		super.copyParentStyle(_styleParent);
 	}
 
 	
-	public function draw(graph:MovieClip){
-		graph.lineStyle(finalBounds.height*k, getHexColor(), 100);
+	override public function draw(graph:MovieClip):void{
+		graph.graphics.lineStyle(finalBounds.height*k, getHexColor(), 100);
 		
-		graph.moveTo(finalBounds.x+step, finalBounds.y + finalBounds.height/3);
-		graph.lineTo(finalBounds.x, finalBounds.y + finalBounds.height - finalBounds.height/3);
+		graph.graphics.moveTo(finalBounds.x+step, finalBounds.y + finalBounds.height/3);
+		graph.graphics.lineTo(finalBounds.x, finalBounds.y + finalBounds.height - finalBounds.height/3);
 		if(num>1){
-			graph.moveTo(finalBounds.x+2*step, finalBounds.y + finalBounds.height/3);
-			graph.lineTo(finalBounds.x + step, finalBounds.y + finalBounds.height - finalBounds.height/3);
+			graph.graphics.moveTo(finalBounds.x+2*step, finalBounds.y + finalBounds.height/3);
+			graph.graphics.lineTo(finalBounds.x + step, finalBounds.y + finalBounds.height - finalBounds.height/3);
 		}
 		if(num>2){
-			graph.moveTo(finalBounds.x+3*step, finalBounds.y + finalBounds.height/3);
-			graph.lineTo(finalBounds.x +2*step, finalBounds.y + finalBounds.height - finalBounds.height/3);
+			graph.graphics.moveTo(finalBounds.x+3*step, finalBounds.y + finalBounds.height/3);
+			graph.graphics.lineTo(finalBounds.x +2*step, finalBounds.y + finalBounds.height - finalBounds.height/3);
 		}
 		
 	}
 	
-	public function toString():String{
+	override public function toString():String{
 		return "PrimeOBox";
 	}
 	
+}
+
 }

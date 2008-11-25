@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.token.operators.normal{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -7,59 +8,62 @@ import learnmath.mathml.formula.*;
 import learnmath.mathml.formula.token.*;
 import learnmath.mathml.formula.script.*;
 import flash.geom.*;
+import flash.display.MovieClip;
 
-class learnmath.mathml.formula.token.operators.normal.GgOBox extends OBox{
+public class GgOBox extends OBox{
 
-	var k:Number = 8/100;
-	var wl:Number = 1;
+	private var k:Number = 0.08;
+	private var wl:Number = 1;
 
-	public function	GgOBox(parentBox:Box){
+	public function	GgOBox(parentBox:Box):void{
 		super(parentBox);
 	}
 
 	
-	public function calculate(){
+	override public function calculate():void{
 		DrawFormula.calculateText(finalBounds, text, style);
-		var h1 = FontConstant.getHeight(style, "X");
-		var w1 = FontConstant.getWidth(style, "X");
+		var h1:Number = FontConstant.getHeight(style, "X");
+		var w1:Number = FontConstant.getWidth(style, "X");
 		
 		finalBounds.width=w1*1.3;
 		finalBounds.height=h1;
 		finalBounds.y = finalBounds.y - h1/2
 	}
 	
-	public function copyParentStyle(_styleParent:Style){
+	override public function copyParentStyle(_styleParent:Style):void{
 		super.copyParentStyle(_styleParent);
 	}
 	
-	public function draw(graph:MovieClip){
-		graph.lineStyle(finalBounds.height*k, getHexColor(), 100);
+	override public function draw(graph:MovieClip):void{
+		graph.graphics.lineStyle(finalBounds.height*k, getHexColor(), 100);
 		
 		wl = finalBounds.width*0.6;
 		
-		var step = wl*0.35;
-		graph.moveTo(finalBounds.x+finalBounds.width/2-wl/2, finalBounds.y + finalBounds.height*0.5-wl/3);
-		graph.lineTo(finalBounds.x+finalBounds.width/2, finalBounds.y + finalBounds.height*0.5);
+		var step:Number = wl*0.35;
+		graph.graphics.moveTo(finalBounds.x+finalBounds.width/2-wl/2, finalBounds.y + finalBounds.height*0.5-wl/3);
+		graph.graphics.lineTo(finalBounds.x+finalBounds.width/2, finalBounds.y + finalBounds.height*0.5);
 		
-		graph.moveTo(finalBounds.x+finalBounds.width/2-wl/2, finalBounds.y + finalBounds.height*0.5+wl/3);
-		graph.lineTo(finalBounds.x+finalBounds.width/2, finalBounds.y + finalBounds.height*0.5);
+		graph.graphics.moveTo(finalBounds.x+finalBounds.width/2-wl/2, finalBounds.y + finalBounds.height*0.5+wl/3);
+		graph.graphics.lineTo(finalBounds.x+finalBounds.width/2, finalBounds.y + finalBounds.height*0.5);
 
-		graph.moveTo(finalBounds.x+finalBounds.width/2-wl/2 + step, finalBounds.y + finalBounds.height*0.5-wl/3);
-		graph.lineTo(finalBounds.x+finalBounds.width/2 + step, finalBounds.y + finalBounds.height*0.5);
+		graph.graphics.moveTo(finalBounds.x+finalBounds.width/2-wl/2 + step, finalBounds.y + finalBounds.height*0.5-wl/3);
+		graph.graphics.lineTo(finalBounds.x+finalBounds.width/2 + step, finalBounds.y + finalBounds.height*0.5);
 		
-		graph.moveTo(finalBounds.x+finalBounds.width/2-wl/2 + step, finalBounds.y + finalBounds.height*0.5+wl/3);
-		graph.lineTo(finalBounds.x+finalBounds.width/2 + step, finalBounds.y + finalBounds.height*0.5);
+		graph.graphics.moveTo(finalBounds.x+finalBounds.width/2-wl/2 + step, finalBounds.y + finalBounds.height*0.5+wl/3);
+		graph.graphics.lineTo(finalBounds.x+finalBounds.width/2 + step, finalBounds.y + finalBounds.height*0.5);
 
-		graph.moveTo(finalBounds.x+finalBounds.width/2-wl/2 + 2*step, finalBounds.y + finalBounds.height*0.5-wl/3);
-		graph.lineTo(finalBounds.x+finalBounds.width/2 + 2*step, finalBounds.y + finalBounds.height*0.5);
+		graph.graphics.moveTo(finalBounds.x+finalBounds.width/2-wl/2 + 2*step, finalBounds.y + finalBounds.height*0.5-wl/3);
+		graph.graphics.lineTo(finalBounds.x+finalBounds.width/2 + 2*step, finalBounds.y + finalBounds.height*0.5);
 		
-		graph.moveTo(finalBounds.x+finalBounds.width/2-wl/2 + 2*step, finalBounds.y + finalBounds.height*0.5+wl/3);
-		graph.lineTo(finalBounds.x+finalBounds.width/2 + 2*step, finalBounds.y + finalBounds.height*0.5);
+		graph.graphics.moveTo(finalBounds.x+finalBounds.width/2-wl/2 + 2*step, finalBounds.y + finalBounds.height*0.5+wl/3);
+		graph.graphics.lineTo(finalBounds.x+finalBounds.width/2 + 2*step, finalBounds.y + finalBounds.height*0.5);
 
 	}
 	
-	public function toString():String{
+	override public function toString():String{
 		return "GgOBox";
 	}
 	
+}
+
 }

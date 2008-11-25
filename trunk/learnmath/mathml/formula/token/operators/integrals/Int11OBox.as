@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.token.operators.integrals{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -10,29 +11,32 @@ import learnmath.mathml.formula.token.operators.integrals.*;
 import learnmath.mathml.formula.script.*;
 import learnmath.mathml.formula.util.*;
 import flash.geom.*;
+import flash.display.MovieClip;
 
-class learnmath.mathml.formula.token.operators.integrals.Int11OBox extends IntOBox{
+public class Int11OBox extends IntOBox{
 
-	public function	Int11OBox(parentBox:Box){
+	public function	Int11OBox(parentBox:Box):void{
 		//fpartint
 		super(parentBox);
 	}
 
 	
-	public function draw(graph:MovieClip){
+	override public function draw(graph:MovieClip):void{
 		super.draw(graph);
 		
-		var x = finalBounds.x + finalBounds.width/2;
-		var y = finalBounds.y + finalBounds.height/2;
-		var rx = intWidth/4;
+		var x:Number = finalBounds.x + finalBounds.width/2;
+		var y:Number = finalBounds.y + finalBounds.height/2;
+		var rx:Number = intWidth/4;
 		
-		graph.lineStyle(2*l*finalBounds.height, getHexColor(), 100);
-		graph.moveTo(x + rx , y);
-    		graph.lineTo(x - rx , y);
+		graph.graphics.lineStyle(2*l*finalBounds.height, getHexColor(), 100);
+		graph.graphics.moveTo(x + rx , y);
+    		graph.graphics.lineTo(x - rx , y);
 
 	}
 
-	public function toString():String{
+	override public function toString():String{
 		return "Int11OBox";
 	}
+}
+
 }

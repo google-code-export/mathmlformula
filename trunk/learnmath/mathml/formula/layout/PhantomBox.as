@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.layout{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -6,19 +7,22 @@
 import learnmath.mathml.formula.*;
 import learnmath.mathml.formula.layout.*;
 import flash.geom.*;
+import flash.display.MovieClip;
 
-class learnmath.mathml.formula.layout.PhantomBox extends RowBox{
+public class PhantomBox extends RowBox{
 	
 	public function	PhantomBox(parentBox:Box){
 		super(parentBox);
 	}
 	
 	
-	public function draw(graph:MovieClip){
+	override public function draw(graph:MovieClip):void{
 	}
 
-	public function toString():String{
+	override public function toString():String{
 		return "PhantomBox";
 	}
 	
+}
+
 }

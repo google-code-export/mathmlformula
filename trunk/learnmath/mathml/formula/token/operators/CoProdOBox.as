@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.token.operators{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -6,21 +7,22 @@
 import learnmath.mathml.formula.*;
 import learnmath.mathml.formula.token.*;
 import flash.geom.*;
+import flash.display.MovieClip;
 
-class learnmath.mathml.formula.token.operators.CoProdOBox extends OBox{
+public class CoProdOBox extends OBox{
 
-	var addSize:Number = 3;
-	var k:Number = 30/45;
-	var l:Number = 3/45;
-	var z:Number = 2/10;
+	private var addSize:Number = 3;
+	private var k:Number = 30./45;
+	private var l:Number = 3./45;
+	private var z:Number = 0.2;
 
-	public function	CoProdOBox(parentBox:Box){
+	public function	CoProdOBox(parentBox:Box):void{
 		super(parentBox);
 	}
 
 	
-	public function calculate(){
-		var h = FontConstant.getHeight(style, "X");
+	override public function calculate():void{
+		var h:Number = FontConstant.getHeight(style, "X");
 		finalBounds.width=k*h;
 		finalBounds.height=h;
 		finalBounds.y=finalBounds.y-finalBounds.height/2;
@@ -28,21 +30,21 @@ class learnmath.mathml.formula.token.operators.CoProdOBox extends OBox{
 	}
 	
 	
-	public function changeSizeFromParent(){
+	override public function changeSizeFromParent():void{
 		resizeFromParent();
 	}
 	
-	public function copyParentStyle(_styleParent:Style){
+	override public function copyParentStyle(_styleParent:Style):void{
 		super.copyParentStyle(_styleParent);
 		this.style.size = this.style.size + addSize;
 	}
 	
-	public function draw(graph:MovieClip){
-		var h = finalBounds.height;
-		var w = finalBounds.width
-		var d = l*h;
+	override public function draw(graph:MovieClip):void{
+		var h:Number = finalBounds.height;
+		var w:Number = finalBounds.width
+		var d:Number = l*h;
 				
-		var s = d;
+		var s:Number = d;
 		if(s<2){
 			s=2;
 		}
@@ -50,29 +52,31 @@ class learnmath.mathml.formula.token.operators.CoProdOBox extends OBox{
 			s=5;
 			d=5;
 		}
-		graph.lineStyle(s, getHexColor(), 100);
+		graph.graphics.lineStyle(s, getHexColor(), 100);
 
-		graph.moveTo(finalBounds.x+w, finalBounds.y + h - d);
-		graph.lineTo(finalBounds.x, finalBounds.y + h - d);
+		graph.graphics.moveTo(finalBounds.x+w, finalBounds.y + h - d);
+		graph.graphics.lineTo(finalBounds.x, finalBounds.y + h - d);
 		
-		graph.lineStyle(2*s, getHexColor(), 100);
-		graph.moveTo(finalBounds.x+ w*z, finalBounds.y + d*5/2);
-		graph.lineTo(finalBounds.x+ w*z, finalBounds.y + h - d*3/2 );
+		graph.graphics.lineStyle(2*s, getHexColor(), 100);
+		graph.graphics.moveTo(finalBounds.x+ w*z, finalBounds.y + d*5/2);
+		graph.graphics.lineTo(finalBounds.x+ w*z, finalBounds.y + h - d*3/2 );
 		
-		graph.lineStyle(s, getHexColor(), 100);
-		graph.moveTo(finalBounds.x+ w*z-d, finalBounds.y + 2*d);
-		graph.lineTo(finalBounds.x+ w*z+d, finalBounds.y + 2*d );
+		graph.graphics.lineStyle(s, getHexColor(), 100);
+		graph.graphics.moveTo(finalBounds.x+ w*z-d, finalBounds.y + 2*d);
+		graph.graphics.lineTo(finalBounds.x+ w*z+d, finalBounds.y + 2*d );
 		
-		graph.lineStyle(2*s, getHexColor(), 100);
-		graph.moveTo(finalBounds.x + w*(1-z), finalBounds.y + d*5/2);
-		graph.lineTo(finalBounds.x + w*(1-z), finalBounds.y + h - d*3/2);
+		graph.graphics.lineStyle(2*s, getHexColor(), 100);
+		graph.graphics.moveTo(finalBounds.x + w*(1-z), finalBounds.y + d*5/2);
+		graph.graphics.lineTo(finalBounds.x + w*(1-z), finalBounds.y + h - d*3/2);
 		
-		graph.lineStyle(s, getHexColor(), 100);
-		graph.moveTo(finalBounds.x + w*(1-z) -d, finalBounds.y + 2*d);
-		graph.lineTo(finalBounds.x + w*(1-z) +d, finalBounds.y + 2*d );
+		graph.graphics.lineStyle(s, getHexColor(), 100);
+		graph.graphics.moveTo(finalBounds.x + w*(1-z) -d, finalBounds.y + 2*d);
+		graph.graphics.lineTo(finalBounds.x + w*(1-z) +d, finalBounds.y + 2*d );
 	}
 
-	public function toString():String{
+	override public function toString():String{
 		return "CoProdOBox";
 	}
+}
+
 }

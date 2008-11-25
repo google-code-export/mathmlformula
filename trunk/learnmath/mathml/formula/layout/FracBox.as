@@ -1,3 +1,4 @@
+﻿package learnmath.mathml.formula.layout{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -5,20 +6,21 @@
 ---------------------------------------------------------------*/
 import learnmath.mathml.formula.*;
 import flash.geom.*;
+import flash.display.MovieClip;
 
-class learnmath.mathml.formula.layout.FracBox extends Box{
+public class FracBox extends Box{
 	
-	var num:Box;
-	var denum:Box;
-	var linethickness = 1;
-	var kLine:Number = 6/100;		
-	var bevelled = false;
-		
-	public function	FracBox(parentBox:Box){
+	public var num:Box;
+	public var denum:Box;
+	public var linethickness:Number = 1;
+	private var kLine:Number = 0.06;
+	public var bevelled:Boolean = false;
+	
+	public function	FracBox(parentBox:Box):void{
 		super(parentBox);
 	}
 	
-	public function calculate(){
+	override public function calculate():void{
 		num.calculateBox(new Point());
 		denum.calculateBox(new Point());
 		
@@ -39,24 +41,24 @@ class learnmath.mathml.formula.layout.FracBox extends Box{
 		
 	}
 	
-	public function moveMyChildren(){
+	override public function moveMyChildren():void{
 		if(bevelled){
-			var cP = new Point();
+			var cP:Point = new Point();
 			cP.x = originPoint.x ;
 			cP.y = originPoint.y + (1/4)*num.finalBounds.height - (num.finalBounds.y + num.finalBounds.height - num.originPoint.y);
 			num.moveOriginTo(cP);
 
-			var cD = new Point();
+			var cD:Point = new Point();
 			cD.x = originPoint.x + num.finalBounds.width + 10;
 			cD.y = originPoint.y - (1/4)*denum.finalBounds.height + (denum.originPoint.y-denum.finalBounds.y);
 			denum.moveOriginTo(cD);
 		}else{
-			var cP = new Point();
+			cP = new Point();
 			cP.x = originPoint.x + (finalBounds.width - num.finalBounds.width)/2;
 			cP.y = originPoint.y - (num.finalBounds.y + num.finalBounds.height - num.originPoint.y);
 			num.moveOriginTo(cP);
 
-			var cD = new Point();
+			cD = new Point();
 			cD.x = originPoint.x + (finalBounds.width - denum.finalBounds.width)/2;
 			cD.y = originPoint.y + (denum.originPoint.y-denum.finalBounds.y);
 			denum.moveOriginTo(cD);
@@ -64,32 +66,34 @@ class learnmath.mathml.formula.layout.FracBox extends Box{
 	}	
 
 
-	public function copyParentStyle(_styleParent:Style){
+	override public function copyParentStyle(_styleParent:Style):void{
 		super.copyParentStyle(_styleParent);
 		num.copyParentStyle(this.style);
 		denum.copyParentStyle(this.style);
 	}
 	
 
-	public function draw(graph:MovieClip){
+	override public function draw(graph:MovieClip):void{
 		num.drawBox(graph);
 
-		var s = getTinethickness(linethickness, kLine);
-		graph.lineStyle(s, getHexColor(), 100);
+		var s:Number = getTinethickness(linethickness, kLine);
+		graph.graphics.lineStyle(s, style.getHexColor(), 100);
 		if(bevelled){
-			graph.moveTo(num.finalBounds.x+num.finalBounds.width+10, num.finalBounds.y);
-			graph.lineTo(num.finalBounds.x+num.finalBounds.width, denum.finalBounds.y+denum.finalBounds.height);
+			graph.graphics.moveTo(num.finalBounds.x+num.finalBounds.width+10, num.finalBounds.y);
+			graph.graphics.lineTo(num.finalBounds.x+num.finalBounds.width, denum.finalBounds.y+denum.finalBounds.height);
 		}else{
-			graph.moveTo(originPoint.x, originPoint.y);
-			graph.lineTo(originPoint.x + finalBounds.width, originPoint.y);
+			graph.graphics.moveTo(originPoint.x, originPoint.y);
+			graph.graphics.lineTo(originPoint.x + finalBounds.width, originPoint.y);
 		}
 
 		denum.drawBox(graph);
 
 	}
 	
-	public function toString():String{
+	override public function toString():String{
 		return "FracBox "+finalBounds + " [ num " + num.toString() + ",  denum " + denum.toString();
 	}
 	
+}
+
 }

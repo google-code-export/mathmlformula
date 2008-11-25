@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.token.operators{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -7,21 +8,22 @@ import learnmath.mathml.formula.*;
 import learnmath.mathml.formula.token.*;
 import learnmath.mathml.formula.util.*;
 import flash.geom.*;
+import flash.display.MovieClip;
 
-class learnmath.mathml.formula.token.operators.UnionOBox extends OBox{
+public class UnionOBox extends OBox{
 
-	var addSize:Number = 3;
-	var k:Number = 30/45;
-	var l:Number = 2/10;
-	var z:Number = 2/10;
+	private var addSize:Number = 3;
+	private var k:Number = 30./45;
+	private var l:Number = 0.2;
+	private var z:Number = 0.2;
 
-	public function	UnionOBox(parentBox:Box){
+	public function	UnionOBox(parentBox:Box):void{
 		super(parentBox);
 	}
 
 	
-	public function calculate(){
-		var h = FontConstant.getHeight(style, "X");
+	override public function calculate():void{
+		var h:Number = FontConstant.getHeight(style, "X");
 		finalBounds.width=k*h;
 		finalBounds.height=h;
 		finalBounds.y=finalBounds.y-finalBounds.height/2;
@@ -29,36 +31,38 @@ class learnmath.mathml.formula.token.operators.UnionOBox extends OBox{
 	}
 	
 	
-	public function changeSizeFromParent(){
+	override public function changeSizeFromParent():void{
 		resizeFromParent();
 	}
 	
-	public function copyParentStyle(_styleParent:Style){
+	override public function copyParentStyle(_styleParent:Style):void{
 		super.copyParentStyle(_styleParent);
 		this.style.size = this.style.size + addSize;
 	}
 	
-	public function draw(graph:MovieClip){
-		var h = finalBounds.height;
-		var w = finalBounds.width
-		var d = l*w;
+	override public function draw(graph:MovieClip):void{
+		var h:Number = finalBounds.height;
+		var w:Number = finalBounds.width
+		var d:Number = l*w;
 				
-		graph.lineStyle(d, getHexColor(), 100);
+		graph.graphics.lineStyle(d, getHexColor(), 100);
 		
-		var r = (w - 2*d)/2;
+		var r:Number = (w - 2*d)/2;
 		
-		graph.moveTo(finalBounds.x + d, finalBounds.y + d);
-		graph.lineTo(finalBounds.x + d, finalBounds.y + h - r - d);
+		graph.graphics.moveTo(finalBounds.x + d, finalBounds.y + d);
+		graph.graphics.lineTo(finalBounds.x + d, finalBounds.y + h - r - d);
 
-		graph.moveTo(finalBounds.x + w - d, finalBounds.y + d);
-		graph.lineTo(finalBounds.x + w - d, finalBounds.y + h - r - d);
+		graph.graphics.moveTo(finalBounds.x + w - d, finalBounds.y + d);
+		graph.graphics.lineTo(finalBounds.x + w - d, finalBounds.y + h - r - d);
 
     		DrawUtil.drawArc(graph, finalBounds.x + d, finalBounds.y + h - r - d, r, 180, 180);
     		
 
 	}
 
-	public function toString():String{
+	override public function toString():String{
 		return "UnionOBox";
 	}
+}
+
 }

@@ -1,3 +1,4 @@
+package learnmath.mathml.formula{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -6,27 +7,29 @@
 import flash.geom.*;
 import learnmath.mathml.formula.*;
 
-class learnmath.mathml.formula.ResizeBox{
+public class ResizeBox{
 	
 
-	static var children:Array = new Array();
+	public static var children:Array = new Array();
 	
 
-	public static function clear(){
+	public static function clear():void{
 		children = new Array();
 	}
 
-	public static function addBox(box:Box){
+	public static function addBox(box:Box):void{
 		children[children.length] = box;
 	}
 
 
-	public static function resizeChildren(){
-		for(var i:Number =0; i<children.length;i++){
+	public static function resizeChildren():void{
+		for(var i:int =0; i<children.length;i++){
 			var child:Box = children[i];
 			child.changeSizeFromParent();
 		}
 	}
 
+
+}
 
 }

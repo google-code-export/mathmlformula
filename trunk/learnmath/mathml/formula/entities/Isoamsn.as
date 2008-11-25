@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.entities{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -5,15 +6,15 @@
 ---------------------------------------------------------------*/
 import learnmath.mathml.formula.entities.*;
 
-class learnmath.mathml.formula.entities.Isoamsn extends EntityGroup{
+public class Isoamsn extends EntityGroup{
 	
 	//Added Math Symbols: Negated Relations for MathML 2.0
 	
-	public function getEntities(){
+	override public function getEntities():String{
 		return allCodes;
 	}
 
-static var allCodes = "<! gnap             &#x02A8A; >" + 
+private static var allCodes:String = "<! gnap             &#x02A8A; >" + 
 "<! gnE              &#x02269; >" + 
 "<! gne              &#x02A88; >" + 
 "<! gnsim            &#x022E7; >" + 
@@ -103,4 +104,6 @@ static var allCodes = "<! gnap             &#x02A8A; >" +
 "<! vsubne           &#x0228A;&#x0FE00; >" + 
 "<! vsupnE           &#x02ACC;&#x0FE00; >" + 
 "<! vsupne           &#x0228B;&#x0FE00; >";
+}
+
 }

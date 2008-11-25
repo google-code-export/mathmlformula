@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.script{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -5,32 +6,33 @@
 ---------------------------------------------------------------*/
 import learnmath.mathml.formula.*;
 import flash.geom.*;
+import flash.display.MovieClip;
 
-class learnmath.mathml.formula.script.OverBox extends Box{
+public class OverBox extends Box{
 	
-	var base:Box;
-	var exp:Box;
+	public var base:Box;
+	public var exp:Box;
 	
-	var k:Number = 6/10;
+	private var k:Number = 0.6;
 	
-	public function	OverBox(parentBox:Box){
+	public function	OverBox(parentBox:Box):void{
 		super(parentBox);
 	}
 	
 	
-	public function calculate(){
-		var cP = new Point();
+	override public function calculate():void{
+		var cP:Point = new Point();
 		cP.x = originPoint.x;
 		cP.y = originPoint.y;
 		base.calculateBox(cP);
 		
-		var cE = new Point();
+		var cE:Point = new Point();
 		cE.x = originPoint.x ;
 		cE.y = originPoint.y - base.finalBounds.height * k;
 		exp.calculateBox(cE);
 		
 		//center exp
-		var dif = (base.finalBounds.width - exp.finalBounds.width)/2;
+		var dif:Number = (base.finalBounds.width - exp.finalBounds.width)/2;
 		if(dif>0){
 			cE.x = originPoint.x + dif;
 			exp.moveOriginTo(cE);
@@ -48,10 +50,10 @@ class learnmath.mathml.formula.script.OverBox extends Box{
 	}
 	
 
-	public function moveMyChildren(){
-		var dif = (base.finalBounds.width - exp.finalBounds.width)/2;
-		var cP = new Point();
-		var cE = new Point();
+	override public function moveMyChildren():void{
+		var dif:Number = (base.finalBounds.width - exp.finalBounds.width)/2;
+		var cP:Point = new Point();
+		var cE:Point = new Point();
 		cP.y = originPoint.y;
 		cE.y = originPoint.y - base.finalBounds.height * k;
 
@@ -70,18 +72,20 @@ class learnmath.mathml.formula.script.OverBox extends Box{
 	
 	
 	
-	public function copyParentStyle(_styleParent:Style){
+	override public function copyParentStyle(_styleParent:Style):void{
 		super.copyParentStyle(_styleParent);
 		
 		base.copyParentStyle(this.style);
-		var newStyle = this.style.getCopy();
+		var newStyle:Style = this.style.getCopy();
 		newStyle.size = newStyle.size - 6;
 		newStyle.fontweight='bold';
 		exp.copyParentStyle(newStyle);
 	}
 	
-	public function draw(graph:MovieClip){
+	override public function draw(graph:MovieClip):void{
 		base.drawBox(graph);
 		exp.drawBox(graph);
 	}
+}
+
 }

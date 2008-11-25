@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.entities{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -5,15 +6,15 @@
 ---------------------------------------------------------------*/
 import learnmath.mathml.formula.entities.*;
 
-class learnmath.mathml.formula.entities.Isomfrk extends EntityGroup{
+public class Isomfrk extends EntityGroup{
 	
 	//Math Alphabets: Fraktur for MathML 2.0 
 	
-	public function getEntities(){
+	override public function getEntities():String{
 		return allCodes;
 	}
 
-static var allCodes = "<! Afr              &#x1D504; >" + 
+private static var allCodes:String = "<! Afr              &#x1D504; >" + 
 "<! afr              &#x1D51E; >" + 
 "<! Bfr              &#x1D505; >" + 
 "<! bfr              &#x1D51F; >" + 
@@ -65,4 +66,6 @@ static var allCodes = "<! Afr              &#x1D504; >" +
 "<! yfr              &#x1D536; >" + 
 "<! Zfr              &#x02128; >" + 
 "<! zfr              &#x1D537; >";
+}
+
 }

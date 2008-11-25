@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.entities{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -5,15 +6,15 @@
 ---------------------------------------------------------------*/
 import learnmath.mathml.formula.entities.*;
 
-class learnmath.mathml.formula.entities.Isolat1 extends EntityGroup{
+public class Isolat1 extends EntityGroup{
 	
 	//Added Latin 1 for MathML 2.0
 	
-	public function getEntities(){
+	override public function getEntities():String{
 		return allCodes;
 	}
 
-static var allCodes = "<! Aacute           &#x000C1; >" + 
+private static var allCodes:String = "<! Aacute           &#x000C1; >" + 
 "<! aacute           &#x000E1; >" + 
 "<! Acirc            &#x000C2; >" + 
 "<! acirc            &#x000E2; >" + 
@@ -75,4 +76,6 @@ static var allCodes = "<! Aacute           &#x000C1; >" +
 "<! Yacute           &#x000DD; >" + 
 "<! yacute           &#x000FD; >" + 
 "<! yuml             &#x000FF; >";
+}
+
 }

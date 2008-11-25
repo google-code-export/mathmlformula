@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.token.operators.integrals{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -10,26 +11,29 @@ import learnmath.mathml.formula.token.operators.integrals.*;
 import learnmath.mathml.formula.script.*;
 import learnmath.mathml.formula.util.*;
 import flash.geom.*;
+import flash.display.MovieClip;
 
-class learnmath.mathml.formula.token.operators.integrals.Int4OBox extends IntOBox{
+public class Int4OBox extends IntOBox{
 
-	public function	Int4OBox(parentBox:Box){
+	public function	Int4OBox(parentBox:Box):void{
 		//oint
 		super(parentBox);
 	}
 
 	
-	public function draw(graph:MovieClip){
+	override public function draw(graph:MovieClip):void{
 		super.draw(graph);
 		
-		var x = finalBounds.x + finalBounds.width/2;
-		var y = finalBounds.y + finalBounds.height/2;
-		var rx = intWidth/3;		
+		var x:Number = finalBounds.x + finalBounds.width/2;
+		var y:Number = finalBounds.y + finalBounds.height/2;
+		var rx:Number = intWidth/3;		
 		
 		DrawUtil.drawOval(graph, x, y, rx, rx);
 	}
 
-	public function toString():String{
+	override public function toString():String{
 		return "Int4OBox";
 	}
+}
+
 }

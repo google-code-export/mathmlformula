@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.script{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -5,24 +6,25 @@
 ---------------------------------------------------------------*/
 import learnmath.mathml.formula.*;
 import flash.geom.*;
+import flash.display.MovieClip;
 
-class learnmath.mathml.formula.script.SupBox extends Box{
+public class SupBox extends Box{
 	
-	var base:Box;
-	var exp:Box;
+	public var base:Box;
+	public var exp:Box;
 	
-	public function	SupBox(parentBox:Box){
+	public function	SupBox(parentBox:Box):void{
 		super(parentBox);
 	}
 	
 	
-	public function calculate(){
-		var cP = new Point();
+	override public function calculate():void{
+		var cP:Point = new Point();
 		cP.x = originPoint.x;
 		cP.y = originPoint.y;
 		base.calculateBox(cP);
 		
-		var cE = new Point();
+		var cE:Point = new Point();
 		cE.x = originPoint.x + base.finalBounds.width;
 		cE.y = originPoint.y - base.finalBounds.height/3;
 		exp.calculateBox(cE);
@@ -34,13 +36,13 @@ class learnmath.mathml.formula.script.SupBox extends Box{
 	}
 	
 
-	public function moveMyChildren(){
-		var cP = new Point();
+	override public function moveMyChildren():void{
+		var cP:Point = new Point();
 		cP.x = originPoint.x;
 		cP.y = originPoint.y;
 		base.moveOriginTo(cP);
 		
-		var cS = new Point();
+		var cS:Point = new Point();
 		cS.x = originPoint.x + base.finalBounds.width;
 		cS.y = originPoint.y - base.finalBounds.height/3;
 		exp.moveOriginTo(cS);
@@ -48,19 +50,21 @@ class learnmath.mathml.formula.script.SupBox extends Box{
 	}
 	
 
-	public function copyParentStyle(_styleParent:Style){
+	override public function copyParentStyle(_styleParent:Style):void{
 		super.copyParentStyle(_styleParent);
 		
 		base.copyParentStyle(this.style);
-		var newStyle = this.style.getCopy();
+		var newStyle:Style = this.style.getCopy();
 		newStyle.size = newStyle.size -3;
 		newStyle.fontweight='bold';
 		exp.copyParentStyle(newStyle);
 	}
 	
-	public function draw(graph:MovieClip){
+	override public function draw(graph:MovieClip):void{
 		base.drawBox(graph);
 		exp.drawBox(graph);
 	}
+
+}
 
 }

@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.entities{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -5,16 +6,16 @@
 ---------------------------------------------------------------*/
 import learnmath.mathml.formula.entities.*;
 
-class learnmath.mathml.formula.entities.Isoamsb extends EntityGroup{
+public class Isoamsb extends EntityGroup{
 	
 	//Added Math Symbols: Binary Operators for MathML 2.0
 	
 	
-	public function getEntities(){
+	override public function getEntities():String{
 		return allCodes;
 	}
 
-static var allCodes = "<! ac               &#x0223E; >" + 
+private static var allCodes:String = "<! ac               &#x0223E; >" + 
 "<! acE              &#x0223E;&#x00333; >" + 
 "<! amalg            &#x02A3F; >" + 
 "<! barvee           &#x022BD; >" + 
@@ -133,4 +134,6 @@ static var allCodes = "<! ac               &#x0223E; >" +
 "<! xutri            &#x025B3; >" + 
 "<! xvee             &#x022C1; >" + 
 "<! xwedge           &#x022C0; >";
+}
+
 }

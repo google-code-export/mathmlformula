@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.entities{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -5,15 +6,15 @@
 ---------------------------------------------------------------*/
 import learnmath.mathml.formula.entities.*;
 
-class learnmath.mathml.formula.entities.Isocyr2 extends EntityGroup{
+public class Isocyr2 extends EntityGroup{
 	
 	//Non-Russian Cyrillic for MathML 2.0
 	
-	public function getEntities(){
+	override public function getEntities():String{
 		return allCodes;
 	}
 
-static var allCodes = "<! DJcy             &#x00402; >" + 
+private static var allCodes:String = "<! DJcy             &#x00402; >" + 
 "<! djcy             &#x00452; >" + 
 "<! DScy             &#x00405; >" + 
 "<! dscy             &#x00455; >" + 
@@ -39,4 +40,6 @@ static var allCodes = "<! DJcy             &#x00402; >" +
 "<! ubrcy            &#x0045E; >" + 
 "<! YIcy             &#x00407; >" + 
 "<! yicy             &#x00457; >";
+}
+
 }

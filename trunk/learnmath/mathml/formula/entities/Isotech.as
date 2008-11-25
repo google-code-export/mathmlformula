@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.entities{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -5,15 +6,15 @@
 ---------------------------------------------------------------*/
 import learnmath.mathml.formula.entities.*;
 
-class learnmath.mathml.formula.entities.Isotech extends EntityGroup{
+public class Isotech extends EntityGroup{
 	
 	//General Technical for MathML 2.0
 	
-	public function getEntities(){
+	override public function getEntities():String{
 		return allCodes;
 	}
 
-static var allCodes = "<! acd              &#x0223F; >" + 
+private static var allCodes:String = "<! acd              &#x0223F; >" + 
 "<! aleph            &#x02135; >" + 
 "<! And              &#x02A53; >" + 
 "<! and              &#x02227; >" + 
@@ -174,4 +175,6 @@ static var allCodes = "<! acd              &#x0223F; >" +
 "<! Verbar           &#x02016; >" + 
 "<! wedgeq           &#x02259; >" + 
 "<! xnis             &#x022FB; >";
+}
+
 }

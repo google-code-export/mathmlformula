@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.token.operators.arrows{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -7,22 +8,23 @@ import learnmath.mathml.formula.*;
 import learnmath.mathml.formula.token.*;
 import learnmath.mathml.formula.script.*;
 import flash.geom.*;
+import flash.display.MovieClip;
 
-class learnmath.mathml.formula.token.operators.arrows.TildeOBox extends OBox{
+public class TildeOBox extends OBox{
 
-	var k:Number = 1/10;
-	var l:Number = 1/10;
-	var wl:Number = 1;
+	private var k:Number = 0.1;
+	private var l:Number = 0.1;
+	private var wl:Number = 1;
 
-	public function	TildeOBox(parentBox:Box){
+	public function	TildeOBox(parentBox:Box):void{
 		super(parentBox);
 	}
 
 	
-	public function calculate(){
+	override public function calculate():void{
 		DrawFormula.calculateText(finalBounds, text, style);
-		var h1 = FontConstant.getHeight(style, "X");
-		var w1 = FontConstant.getWidth(style, "X");
+		var h1:Number = FontConstant.getHeight(style, "X");
+		var w1:Number = FontConstant.getWidth(style, "X");
 		
 		finalBounds.width=w1;
 		finalBounds.height=h1;
@@ -31,11 +33,11 @@ class learnmath.mathml.formula.token.operators.arrows.TildeOBox extends OBox{
 		ResizeBox.addBox(this);
 	}
 	
-	public function changeSizeFromParent(){
-		var u:UnderBox = UnderBox(parentBox);
-		var o:OverBox = OverBox(parentBox);
-		var uo:UnderOverBox = UnderOverBox(parentBox);
-		if(u!=null | o!=null | uo!=null){
+	override public function changeSizeFromParent():void{
+		var u:UnderBox = new UnderBox(parentBox);
+		var o:OverBox = new OverBox(parentBox);
+		var uo:UnderOverBox = new UnderOverBox(parentBox);
+		if(u!=null || o!=null || uo!=null){
 			if(parentBox.finalBounds.width>finalBounds.width){
 				finalBounds.width = parentBox.finalBounds.width;
 				finalBounds.x = parentBox.finalBounds.x;
@@ -43,20 +45,22 @@ class learnmath.mathml.formula.token.operators.arrows.TildeOBox extends OBox{
 		}
 	}
 	
-	public function copyParentStyle(_styleParent:Style){
+	override public function copyParentStyle(_styleParent:Style):void{
 		super.copyParentStyle(_styleParent);
 	}
 	
-	public function draw(graph:MovieClip){
-		graph.lineStyle(finalBounds.height*k, getHexColor(), 100);
+	override public function draw(graph:MovieClip):void{
+		graph.graphics.lineStyle(finalBounds.height*k, getHexColor(), 100);
 		
-		graph.moveTo(finalBounds.x, finalBounds.y + finalBounds.height*0.6);
-		graph.curveTo(finalBounds.x+finalBounds.width/4, finalBounds.y + finalBounds.height*0.8, finalBounds.x+finalBounds.width/2 , finalBounds.y+ finalBounds.height*0.6);
-		graph.curveTo(finalBounds.x+finalBounds.width*3/4, finalBounds.y + finalBounds.height*0.3,finalBounds.x+finalBounds.width, finalBounds.y + finalBounds.height*0.6);
+		graph.graphics.moveTo(finalBounds.x, finalBounds.y + finalBounds.height*0.6);
+		graph.graphics.curveTo(finalBounds.x+finalBounds.width/4, finalBounds.y + finalBounds.height*0.8, finalBounds.x+finalBounds.width/2 , finalBounds.y+ finalBounds.height*0.6);
+		graph.graphics.curveTo(finalBounds.x+finalBounds.width*3/4, finalBounds.y + finalBounds.height*0.3,finalBounds.x+finalBounds.width, finalBounds.y + finalBounds.height*0.6);
 	}
 	
-	public function toString():String{
+	override public function toString():String{
 		return "TildeOBox";
 	}
 	
+}
+
 }

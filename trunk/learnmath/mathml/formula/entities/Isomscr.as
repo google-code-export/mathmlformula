@@ -1,3 +1,4 @@
+package learnmath.mathml.formula.entities{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -5,15 +6,15 @@
 ---------------------------------------------------------------*/
 import learnmath.mathml.formula.entities.*;
 
-class learnmath.mathml.formula.entities.Isomscr extends EntityGroup{
+public class Isomscr extends EntityGroup{
 	
 	//Math Alphabets: Script for MathML 2.0 
 	
-	public function getEntities(){
+	override public function getEntities():String{
 		return allCodes;
 	}
 
-static var allCodes = "<! Ascr             &#x1D49C; >" + 
+private static var allCodes:String = "<! Ascr             &#x1D49C; >" + 
 "<! ascr             &#x1D4B6; >" + 
 "<! Bscr             &#x0212C; >" + 
 "<! bscr             &#x1D4B7; >" + 
@@ -65,4 +66,6 @@ static var allCodes = "<! Ascr             &#x1D49C; >" +
 "<! yscr             &#x1D4CE; >" + 
 "<! Zscr             &#x1D4B5; >" + 
 "<! zscr             &#x1D4CF; >";
+}
+
 }

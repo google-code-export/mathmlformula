@@ -14,6 +14,7 @@ public class IBox extends TokenBox{
 	
 	public function	IBox(parentBox:Box):void{
 		super(parentBox);
+		style.fontstyle = "italic";
 	}
 
 	override public function draw(graph:MovieClip):void{
@@ -22,6 +23,7 @@ public class IBox extends TokenBox{
 		s.y = originPoint.y - finalBounds.height/2;
 		DrawFormula.createText(graph, s, text, style);
 	}
+	
 	
 	override public function calculate():void{
 		text = EntityManager.replaceAllCode(text);

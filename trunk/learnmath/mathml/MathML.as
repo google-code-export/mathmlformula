@@ -10,6 +10,7 @@ import learnmath.mathml.formula.script.*;
 import learnmath.mathml.formula.token.*;
 import learnmath.mathml.formula.util.*;
 import flash.geom.*;
+import flash.xml.*;
 import flash.display.MovieClip;
 
 public class MathML{
@@ -60,6 +61,10 @@ public class MathML{
 			box = loadMfenced(node, parentBox);
 		}else if(name=='mphantom'){
 			box = loadMPhantom(node, parentBox);
+		}else if(name=='mpadded'){
+			box = loadMPadded(node, parentBox);
+		}else if(name=='mspace'){
+			box = loadMSpace(node, parentBox);
 		}else if(name=='merror'){
 			box = loadMError(node, parentBox);
 		}else if(name=='mfrac'){
@@ -88,6 +93,8 @@ public class MathML{
 			box = loadMo(node, parentBox);
 		}else if(name=='mtext'){
 			box = loadMtext(node, parentBox);
+		}else if(name=='ms'){
+			box = loadMs(node, parentBox);
 		}else if(name=='mtable'){
 			box = loadMTable(node, parentBox);
 		}else if(name=='mtr'){
@@ -101,19 +108,22 @@ public class MathML{
 	}
 	
 	private function loadAttributes(node:XML, box:Box):void{
-		if(node.@color.length()==1){
-			box.style.color = node.attribute("color");
+		if(node.attribute("mathcolor").toString().length>0){
+			box.style.color = node.attribute("mathcolor");
 		}
-		if(node.@fontweight.length()==1){
+		if(node.attribute("mathbackground").toString().length>0){
+			box.style.bgcolor = node.attribute("mathbackground");
+		}
+		if(node.attribute("fontweight").toString().length>0){
 			box.style.fontweight = node.attribute("fontweight");
 		}
-		if(node.@fontstyle.length()==1){
+		if(node.attribute("fontstyle").toString().length>0){
 			box.style.fontstyle = node.attribute("fontstyle");
 		}
-		if(node.@fontsize.length()==1){
-			box.style.size = int(node.attribute("fontsize"));
+		if(node.attribute("mathsize").toString().length>0){
+			box.style.size = int(node.attribute("mathsize"));
 		}
-		if(node.@fontfamily.length()==1){
+		if(node.attribute("fontfamily").toString().length>0){
 			box.style.font = node.attribute("fontfamily");
 		}
 	}
@@ -139,19 +149,19 @@ public class MathML{
 				}
 			}
 		}
-		if(node.attribute("rowalign")!=""){
+		if(node.attribute("rowalign").toString().length>0){
 			nodeBox.rowalign = StringUtil.trim(node.attribute("rowalign"));
 		}
-		if(node.attribute("columnalign")!=""){
+		if(node.attribute("columnalign").toString().length>0){
 			nodeBox.columnalign = StringUtil.trim(node.attribute("columnalign"));
 		}
-		if(node.attribute("rowspacing")!=""){
+		if(node.attribute("rowspacing").toString().length>0){
 			nodeBox.rowspacing = Number(StringUtil.trim(node.attribute("rowspacing")));
 		}
-		if(node.attribute("columnspacing")!=""){
+		if(node.attribute("columnspacing").toString().length>0){
 			nodeBox.columnspacing = Number(StringUtil.trim(node.attribute("columnspacing")));
 		}
-		if(node.attribute("framespacing")!=""){
+		if(node.attribute("framespacing").toString().length>0){
 			nodeBox.framespacing = Number(StringUtil.trim(node.attribute("framespacing")));
 		}
 		
@@ -169,10 +179,10 @@ public class MathML{
 				}
 			}
 		}
-		if(node.attribute("rowalign")!=""){
+		if(node.attribute("rowalign").toString().length>0){
 			nodeBox.rowalign = StringUtil.trim(node.attribute("rowalign"));
 		}
-		if(node.attribute("columnalign")!=""){
+		if(node.attribute("columnalign").toString().length>0){
 			nodeBox.columnalign = StringUtil.trim(node.attribute("columnalign"));
 		}
 		return nodeBox;
@@ -187,16 +197,16 @@ public class MathML{
 				nodeBox.addChild(child);
 			}
 		}
-		if(node.attribute("rowalign")!=""){
+		if(node.attribute("rowalign").toString().length>0){
 			nodeBox.rowalign = StringUtil.trim(node.attribute("rowalign"));
 		}
-		if(node.attribute("columnalign")!=""){
+		if(node.attribute("columnalign").toString().length>0){
 			nodeBox.columnalign = StringUtil.trim(node.attribute("columnalign"));
 		}
-		if(node.attribute("rowspan")!=""){
+		if(node.attribute("rowspan").toString().length>0){
 			nodeBox.rowspan = Number(StringUtil.trim(node.attribute("rowspan")));
 		}
-		if(node.attribute("columnspan")!=""){
+		if(node.attribute("columnspan").toString().length>0){
 			nodeBox.columnspan = Number(StringUtil.trim(node.attribute("columnspan")));
 		}
 		return nodeBox;
@@ -210,18 +220,53 @@ public class MathML{
 				nodeBox.addChild(child);
 			}
 		}
-		if(node.attribute("linethickness").length()!=0){
+		if(node.attribute("linethickness").toString().length>0){
 			nodeBox.linethickness = Number(node.attribute("linethickness"));
 		}
-		if(node.attribute("open").length()!=0){
+		if(node.attribute("open").toString().length>0){
 			nodeBox.open = node.attribute("open");
 		}
-		if(node.attribute("close").length()!=0){
+		if(node.attribute("close").toString().length>0){
 			nodeBox.close = node.attribute("close");
 		}
 		return nodeBox;
 	}
 	
+	private function loadMPadded(node:XML, parentBox:Box):Box{
+		var nodeBox:PaddedBox = new PaddedBox(parentBox);
+		for(var i:int =0; i<node.children().length();i++){
+			if(node.children()[i].localName()!=null){
+				var child:Box = loadNode(node.children()[i], nodeBox);
+				nodeBox.addChild(child);
+			}
+		}
+		if(node.attribute("width").toString().length>0){
+			nodeBox.widthS = node.attribute("width");
+		}
+		if(node.attribute("lspace").toString().length>0){
+			nodeBox.lspaceS = node.attribute("lspace");
+		}
+		if(node.attribute("height").toString().length>0){
+			nodeBox.heightS = node.attribute("height");
+		}
+		if(node.attribute("depth").toString().length>0){
+			nodeBox.depthS = node.attribute("depth");
+		}
+		return nodeBox;
+	}
+
+	private function loadMSpace(node:XML, parentBox:Box):Box{
+		var nodeBox:SpaceBox = new SpaceBox(parentBox);
+		if(node.attribute("width").toString().length>0){
+			trace("att" + node.attribute("width"));
+			nodeBox.width = int(node.attribute("width"));
+		}
+		if(node.attribute("height").toString().length>0){
+			nodeBox.height = int(node.attribute("height"));
+		}
+		return nodeBox;
+	}
+
 	private function loadMPhantom(node:XML, parentBox:Box):Box{
 		var nodeBox:PhantomBox = new PhantomBox(parentBox);
 		for(var i:int =0; i<node.children().length();i++){
@@ -247,12 +292,11 @@ public class MathML{
 
 	private function loadMfrac(node:XML, parentBox:Box):Box{
 		var nodeBox:FracBox = new FracBox(parentBox);
-		if(node.attribute("linethickness").length()!=0){
+		if(node.attribute("linethickness").toString().length>0){
 			nodeBox.linethickness = Number(node.attribute("linethickness"));
 		}
-		if(node.attribute("bevelled").length()!=0){
-			if (node.attribute("bevelled").toString()=="true")
-				nodeBox.bevelled = true;
+		if(node.attribute("bevelled").toString().length>0){
+			if (node.attribute("bevelled")=="true") nodeBox.bevelled = true;
 		}
 		var numNode:Box = loadNode(node.children()[0], nodeBox);
 		nodeBox.num = numNode;
@@ -269,7 +313,7 @@ public class MathML{
 				nodeBox.addChild(child);
 			}
 		}
-		if(node.attribute("linethickness")!=""){
+		if(node.attribute("linethickness").toString().length>0){
 			nodeBox.linethickness = int(node.attribute("linethickness"));
 		}
 		return nodeBox;
@@ -281,7 +325,7 @@ public class MathML{
 		nodeBox.base = baseNode;
 		var expNode:Box = loadNode(node.children()[1], nodeBox);
 		nodeBox.index = expNode;
-		if(node.attribute("linethickness").length()!=0){
+		if(node.attribute("linethickness").toString().length>0){
 			nodeBox.linethickness = int(node.attribute("linethickness"));
 		}
 		return nodeBox;
@@ -352,11 +396,27 @@ public class MathML{
 	}
 
 	private function loadMo(node:XML, parentBox:Box):Box{
-		return OBox.getOBox(StringUtil.trim(node.children()[0].toString()), parentBox);
+		var nodeBox:OBox = OBox.getOBox(StringUtil.trim(node.children()[0].toString()), parentBox);
+		if(node.attribute("stretchy").toString().length>0){
+			nodeBox.stretchy = (StringUtil.trim(node.attribute("stretchy"))).toLowerCase()=="true";
+		}
+		if(node.attribute("maxsize").toString().length>0){
+			nodeBox.maxsize = int(node.attribute("maxsize"));
+		}
+		if(node.attribute("minsize").toString().length>0){
+			nodeBox.minsize = int(node.attribute("minsize"));
+		}
+		return nodeBox;
 	}
 	
 	private function loadMtext(node:XML, parentBox:Box):Box{
 		var nodeBox:TBox = new TBox(parentBox);
+		nodeBox.text = StringUtil.trim(node.children()[0].toString());
+		return nodeBox;
+	}
+
+	private function loadMs(node:XML, parentBox:Box):Box{
+		var nodeBox:SBox = new SBox(parentBox);
 		nodeBox.text = StringUtil.trim(node.children()[0].toString());
 		return nodeBox;
 	}

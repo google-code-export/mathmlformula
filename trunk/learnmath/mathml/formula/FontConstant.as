@@ -22,7 +22,6 @@ public class FontConstant{
 			for(var i:int=1;i<40; i++){
 				fontSize[i]= fontSize[i-1]*fontSizeFactor;
 				fontSize[i-1] = Number(fontSize[i-1]);
-				//trace(i + " - " + fontSize[i-1]);
 			}
 			fontSize[fontSize.length-1] = Number(fontSize[fontSize.length-1]);
 			
@@ -32,7 +31,7 @@ public class FontConstant{
 	public static function getTextFormat(style:Style):TextFormat{
 		init();
 		var tf:TextFormat = new TextFormat();
-		tf.font=style.font; // _sans; _serif; _typewriter
+		tf.font=style.font; 
 		if(style.fontweight=='bold'){
 			tf.bold = true;
 		}
@@ -49,8 +48,11 @@ public class FontConstant{
 		var tfield:TextField = new TextField();
 		tfield.defaultTextFormat = getTextFormat(style);
 		tfield.text = text;
-		return tfield.getLineMetrics(0).width + 4;
-		//return getTextFormat(style).getTextExtent(text).textFieldWidth;
+		var add = 4;
+		if(style.fontstyle=='italic'){
+			add = 7;
+		}
+		return tfield.getLineMetrics(0).width + add;
 	}
 	
 	public static function getHeight(style:Style, text:String):Number{
@@ -59,17 +61,8 @@ public class FontConstant{
 		tfield.defaultTextFormat = getTextFormat(style);
 		tfield.text = text;
 		return tfield.getLineMetrics(0).height+4;
-		//return getTextFormat(style).getTextExtent(text).textFieldHeight;
 	}
 
-	public static function getAscent(style:Style, text:String):Number{
-		init();
-		var tfield:TextField = new TextField();
-		tfield.defaultTextFormat = getTextFormat(style);
-		tfield.text = text;
-		return tfield.getLineMetrics(0).ascent;
-		//return getTextFormat(style).getTextExtent(text).ascent;
-	}
 
 }
 

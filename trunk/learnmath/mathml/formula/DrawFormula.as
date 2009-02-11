@@ -1,4 +1,4 @@
-﻿package learnmath.mathml.formula{
+package learnmath.mathml.formula{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -64,6 +64,7 @@ public class DrawFormula{
 	}
 	
 	public static function calculateText(bounds:Rectangle, text:String, style:Style):void{
+		if(text==null || text=="") return;
 		bounds.width = FontConstant.getWidth(style, text);
 		bounds.height = FontConstant.getHeight(style, text);
 	}
@@ -78,6 +79,15 @@ public class DrawFormula{
 
 	}
 	
+	public static function drawBackground(graph:MovieClip, bounds:Rectangle, style:Style):void{
+		if(style!=null && style.bgcolor!=null && style.bgcolor.length>0){
+			graph.graphics.lineStyle(0, style.getHexBgColor(), 100);
+			graph.graphics.beginFill(style.getHexBgColor());   
+            		graph.graphics.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);   
+            		graph.graphics.endFill();  		
+		}
+	}
+
 }
 
 }

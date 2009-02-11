@@ -16,7 +16,7 @@ public class LineOBox extends OBox{
 	protected var l:Number = 0.1;
 	protected var wl:Number = 1;
 	protected var prec:Number = 0.55;
-
+	
 	public function	LineOBox(parentBox:Box):void{
 		super(parentBox);
 	}
@@ -26,11 +26,17 @@ public class LineOBox extends OBox{
 		DrawFormula.calculateText(finalBounds, text, style);
 		var h1:Number = FontConstant.getHeight(style, "X");
 		var w1:Number = FontConstant.getWidth(style, "X");
-		
+
 		finalBounds.width=1.5*w1;
+		wl = finalBounds.width * l;
+		if(minsize>-1){
+			if(finalBounds.width<(minsize*w1)){
+				finalBounds.width = minsize*w1;
+			}
+		}
+
 		finalBounds.height=h1;
 		finalBounds.y = finalBounds.y - h1/2
-		wl = finalBounds.width * l;
 		ResizeBox.addBox(this);
 	}
 	
@@ -38,12 +44,23 @@ public class LineOBox extends OBox{
 		var u:UnderBox = new UnderBox(parentBox);
 		var o:OverBox = new OverBox(parentBox);
 		var uo:UnderOverBox = new UnderOverBox(parentBox);
-		/*if(u!=null || o!=null || uo!=null){
-			if(parentBox.finalBounds.width>finalBounds.width){
-				finalBounds.width = parentBox.finalBounds.width;
-				finalBounds.x = parentBox.finalBounds.x;
+		if(parentBox is UnderBox || parentBox is OverBox || parentBox is UnderOverBox){
+			var w1:Number = FontConstant.getWidth(style, "X");
+
+			if(stretchy){
+				var mSize = finalBounds.width;
+				var newX = finalBounds.x;
+				if(parentBox.finalBounds.width>finalBounds.width){
+					mSize = parentBox.finalBounds.width;
+					if(maxsize>-1 && mSize>(maxsize*w1)){
+						mSize = maxsize*w1;
+					}
+					finalBounds.width = mSize;
+					finalBounds.x = parentBox.finalBounds.x  + (parentBox.finalBounds.width-mSize)/2;
+				}
 			}
-		}*/
+			
+		}
 	}
 	
 	

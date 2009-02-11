@@ -1,4 +1,4 @@
-﻿package learnmath.mathml.formula{
+package learnmath.mathml.formula{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -122,6 +122,7 @@ public class Box{
 	}
 
 	public function drawBox(graph:MovieClip):void{
+		DrawFormula.drawBackground(graph, finalBounds, style);
 		draw(graph);
 		//DrawFormula.drawRectangle(graph, finalBounds);
 	}

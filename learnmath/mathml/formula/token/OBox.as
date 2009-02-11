@@ -15,6 +15,10 @@ import flash.display.MovieClip;
 
 public class OBox extends TokenBox{
 	protected var text:String = "";
+	
+	public var stretchy:Boolean = true;
+	public var maxsize:int = -1;
+	public var minsize:int = -1;
 
 	public function	OBox(parentBox:Box):void{
 		super(parentBox);

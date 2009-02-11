@@ -1,4 +1,4 @@
-﻿package learnmath.mathml.formula{
+package learnmath.mathml.formula{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -86,6 +86,13 @@ public class EntityManager{
 	
 
 	public static function replaceAllCode(text:String):String{
+		if(text=='&InvisibleTimes;') return "";
+		if(text=='&it;') return "&it;";
+		if(text=='&ApplyFunction;') return "";
+		if(text=='&af;') return "";
+		if(text=='&InvisibleComma;') return "";
+		if(text=='&ic;') return "";
+	
 		var index:int = -1;
 		
 		while(text.indexOf("&", index)>-1){
@@ -137,7 +144,7 @@ public class EntityManager{
 		if(code=='&sfrown;' || code=='&OverParenthesis;') return "&frown;";
 		if(code=='&ssmile;') return "&smile;";
 		if(code=='&cub;') return "&OverBrace;";
-		if(code=='&int;' || code=='∫') return "&Integral;";
+		if(code=='&int;' || code=='?') return "&Integral;";
 		if(code=='&odot;') return "&CircleDot;";
 		if(code=='&ominus;') return "&CircleMinus;";
 		if(code=='&oplus;') return "&CirclePlus;";
@@ -169,14 +176,16 @@ public class EntityManager{
 		if(code=='&smid;' || code=='&VerticalBar;' || code=='&shortmid;') return "&mid;";
 		if(code=='&parallel;' || code=='&spar;' || code=='&shortparallel;') return "&par;";
 		if(code=='¯') return "&UnderBar;";
-		if(code=='→') return "&rarr;";
-		if(code=='←') return "&larr;";
-		if(code=='↔') return "&harr;";
-		if(code=='∑') return "&sum;";
-		if(code=='∏') return "&prod;";
+		if(code=='&InvisibleTimes;') return "";
+		if(code=='&it;') return "&it;";
+		if(code=='&ApplyFunction;') return "";
+		if(code=='&af;') return "";
+		if(code=='&InvisibleComma;') return "";
+		if(code=='&ic;') return "";
 
 		return code;
 	}
+
 
 }
 

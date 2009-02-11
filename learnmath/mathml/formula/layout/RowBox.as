@@ -22,7 +22,7 @@ public class RowBox extends Box{
 	}
 	
 
-	override public function calculate():void{
+	public override function calculate():void{
 		var childx:Number = 0;
 		for(var i:int =0; i<children.length;i++){
 			var child:Box = children[i];
@@ -57,7 +57,7 @@ public class RowBox extends Box{
 	}
 
 
-	override public function moveMyChildren():void{
+	public override function moveMyChildren():void{
 		var childx:Number = 0;
 		for(var i:int =0; i<children.length;i++){
 			var child:Box = children[i];
@@ -71,7 +71,7 @@ public class RowBox extends Box{
 		}
 	}
 	
-	override public function copyParentStyle(_styleParent:Style):void{
+	public override function copyParentStyle(_styleParent:Style):void{
 		super.copyParentStyle(_styleParent);
 		for(var i:int =0; i<children.length;i++){
 			var child:Box = children[i];
@@ -80,7 +80,7 @@ public class RowBox extends Box{
 	}
 	
 	
-	override public function draw(graph:MovieClip):void{
+	public override function draw(graph:MovieClip):void{
 		for(var i:int =0; i<children.length;i++){
 			var child:Box = children[i];
 			child.drawBox(graph);
@@ -88,7 +88,7 @@ public class RowBox extends Box{
 		//DrawFormula.drawRectangle(graph, finalBounds);
 	}
 	
-	override public function toString():String{
+	public override function toString():String{
 		var s:String = "RowBox "+finalBounds+" [";
 		for(var i:int =0; i<children.length;i++){
 			var child:Box = children[i];

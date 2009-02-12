@@ -6,7 +6,6 @@
   * use attributes stretchy, maxsize, and minsize for arrows
   * change fontsize --> mathsize and fontcolor --> mathcolor to conform with MatML 2.0 standard
   * implement mathbackground
-  * implement the code to have colors "aqua", "black", "blue", "fuchsia", "gray", "green", "lime", "maroon", "nav
-y", "olive", "purple", "red", "silver", "teal", "white", and "yellow"
+  * implement the code to have colors "aqua", "black", "blue", "fuchsia", "gray", "green", "lime", "maroon", "navy", "olive", "purple", "red", "silver", "teal", "white", and "yellow"
  
  

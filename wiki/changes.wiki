@@ -1,6 +1,4 @@
-#The changes for each release
-
-= The changes for the version 0.6 =
+== The changes for the version 0.6 ==
 
   * implement mathml tags: ms, mspace and mpadded
   * use attributes stretchy, maxsize, and minsize for arrows

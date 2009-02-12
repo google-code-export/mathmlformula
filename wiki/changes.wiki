@@ -6,6 +6,7 @@
   * use attributes stretchy, maxsize, and minsize for arrows
   * change fontsize --> mathsize and fontcolor --> mathcolor to conform with MathML 2.0 standard
   * implement mathbackground
-  * implement the colors "aqua", "black", "blue", "fuchsia", "gray", "green", "lime", "maroon", "navy", "olive", "purple", "red", "silver", "teal", "white", and "yellow"
+  * implement the html-color-
+name, that is, as one of the color-name keywords defined in HTML4: aqua, black, blue, fuchsia, gray, green, lime, maroon, navy, olive, purple, red, silver, teal, white, and yellow
  
  

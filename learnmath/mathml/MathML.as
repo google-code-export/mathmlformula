@@ -53,6 +53,7 @@ public class MathML{
 	}
 	
 	private function loadNode(node:XML, parentBox:Box):Box{
+		if(node.toString()==""){node.setChildren(" ")};
 		var name:String = node.localName().toLowerCase();
 		var box:Box;
 		if(name=='mrow'){

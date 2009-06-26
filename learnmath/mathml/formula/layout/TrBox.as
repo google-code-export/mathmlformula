@@ -12,8 +12,8 @@ import flash.display.MovieClip;
 public class TrBox extends Box{
 	
 	//private var children:Array;
-	public var rowalign:String = "";			//(top | bottom | center)
-	public var columnalign:String = ""; 			//(left | center | right)
+	public var rowalign:String = "";			//(top || bottom || center)
+	public var columnalign:String = ""; 			//(left || center || right)
 	public var columnspacing:Number = -1;			// exact units or -1 default		
 	
 	private var childrenWidth:Array;
@@ -80,7 +80,7 @@ public class TrBox extends Box{
 			var maxW:Number = finalColumnWidth[i];
 			var dx:Number = (maxW-w)/2
 
-			var tdBox:TdBox = new TdBox(child);
+			var tdBox:TdBox = TdBox(child);
 			if(tdBox.columnalign=="left"){
 				dx = 0;
 			}else if(tdBox.columnalign=="right"){
@@ -115,7 +115,7 @@ public class TrBox extends Box{
 		for(var i:int =0; i<children.length;i++){
 			var child:Box = children[i];
 			
-			var tdBox:TdBox = new TdBox(child);
+			var tdBox:TdBox = TdBox(child);
 			if(tdBox.rowalign==""){ tdBox.rowalign = rowalign; }
 			if(tdBox.columnalign==""){ tdBox.columnalign = columnalign; }
 

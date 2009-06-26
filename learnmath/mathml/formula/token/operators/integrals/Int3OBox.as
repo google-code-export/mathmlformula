@@ -27,7 +27,7 @@ public class Int3OBox extends IntOBox{
 		intWidth = k*h1;
 		finalBounds.height=h1;
 		finalBounds.y=finalBounds.y-finalBounds.height/2;
-		ResizeBox.addBox(this);
+		//ResizeBox.addBox(this);
 	}
 	
 	override public function draw(graph:MovieClip):void{

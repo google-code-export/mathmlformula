@@ -21,7 +21,9 @@ public class IBox extends TokenBox{
 		var s:Point = new Point();
 		s.x = originPoint.x;
 		s.y = originPoint.y - finalBounds.height/2;
-		DrawFormula.createText(graph, s, text, style);
+		//DrawFormula.createText(graph, s, text, style);
+		drawText(graph, s, text);
+		
 	}
 	
 	

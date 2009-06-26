@@ -1,4 +1,4 @@
-package learnmath.mathml.formula{
+﻿package learnmath.mathml.formula{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -11,24 +11,26 @@ import flash.geom.*;
 import flash.display.MovieClip;
 
 public class DrawFormula{
-	private var parentBox:Box;
+	public var parentBox:Box;
 	public static var index:Number = 0;
-	private var mc:MovieClip;
+	public var mc:MovieClip;
 	
 	
 	public function DrawFormula(box:Box):void{
 		parentBox=box;
 	}
 	
-	public function clear(graph:MovieClip):void{
+	public function clear():void{
 		if(mc!=null){
 			//removeMovieClip(mc);
 			mc.graphics.clear();
+			while(mc.numChildren>0){
+				mc.removeChildAt(0);
+			}
 		}
 	}
 	
 	public function draw(graph:MovieClip, style:Style, leftMiddlePoint:Point):Rectangle{
-
 		if(mc==null){
 			mc = new MovieClip();
 			mc.name = "mc" + index;

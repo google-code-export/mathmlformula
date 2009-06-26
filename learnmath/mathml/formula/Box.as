@@ -4,9 +4,8 @@ package learnmath.mathml.formula{
 	Mail: ionel.alexandru@gmail.com
 	Site: www.learn-math.info
 ---------------------------------------------------------------*/
-import flash.geom.*;
-import learnmath.mathml.formula.*;
 import flash.display.MovieClip;
+import flash.geom.*;
 
 public class Box{
 	
@@ -39,7 +38,6 @@ public class Box{
 	}
 
 	public function calculate():void{
-		trace("Box.calculate() !!!")
 	}
 	
 
@@ -100,20 +98,20 @@ public class Box{
 
 
 	public function copyParentStyle(_styleParent:Style):void{
-		if(this.style.font==null){
-			this.style.font = _styleParent.font;
+		if(style.font==null && _styleParent.font!=null){
+			style.font = _styleParent.font;
 		}
-		if(this.style.size==0){
-			this.style.size = _styleParent.size;
+		if(style.size==0 && _styleParent.size>0){
+			style.size = _styleParent.size;
 		}
-		if(this.style.color==null){
-			this.style.color = _styleParent.color;
+		if(style.color==null && _styleParent.color!=null){
+			style.color = _styleParent.color;
 		}
-		if(this.style.fontweight==null){
-			this.style.fontweight = _styleParent.fontweight;
+		if(style.fontweight==null && _styleParent.fontweight!=null){
+			style.fontweight = _styleParent.fontweight;
 		}
-		if(this.style.fontstyle==null){
-			this.style.fontstyle = _styleParent.fontstyle;
+		if(style.fontstyle==null && _styleParent.fontstyle!=null){
+			style.fontstyle = _styleParent.fontstyle;
 		}
 	}
 	
@@ -146,6 +144,57 @@ public class Box{
 			s=4;
 		}
 		return s;
+	}
+	
+//added for editor
+
+	public var selectionStart:Number =0;
+	public var selectionEnd:Number =0;
+
+	public function drawText(graph:MovieClip, p:Point, text:String):void{
+		if(selectionStart>text.length){
+			selectionStart=text.length;
+		}
+		if(selectionStart<0){
+			selectionStart=0;
+		}
+		if(selectionEnd>text.length){
+			selectionEnd=text.length;
+		}
+		if(selectionEnd<0){
+			selectionEnd=0;
+		}
+		if(selectionStart==selectionEnd){
+			DrawFormula.createText(graph, p, text, style);
+		}else if((selectionStart==0 && selectionEnd==text.length) || (selectionEnd==0 && selectionStart==text.length)){
+			var newStyle:Style = style.getCopy();
+			newStyle.color = "#ff0000";
+			DrawFormula.createText(graph, p, text, newStyle);
+		}else if(selectionEnd<selectionStart){
+			drawTextS(graph, text, selectionEnd, selectionStart, p)
+		}else{
+			drawTextS(graph, text, selectionStart, selectionEnd, p)
+		}
+	}
+	
+	public function drawTextS(graph:MovieClip, text:String, startS:Number, endS:Number,  p:Point):void{
+			var t:String = text.substring(0,startS);
+			DrawFormula.createText(graph, p, t, style);
+			var w1:Number = FontConstant.getWidth(style, t);
+
+			t = text.substring(startS, endS);
+			var newStyle:Style = this.style.getCopy();
+			newStyle.color = "#ff0000";
+			var newP:Point = new Point();
+			newP.x = p.x + w1-4;
+			newP.y = p.y;
+			DrawFormula.createText(graph, newP, t, newStyle);
+			var w2:Number = FontConstant.getWidth(style, t);
+
+			newP.x = p.x + w1 + w2-8;
+			newP.y = p.y;
+			t = text.substring(endS);
+			DrawFormula.createText(graph, newP, t, style);
 	}
 	
 }

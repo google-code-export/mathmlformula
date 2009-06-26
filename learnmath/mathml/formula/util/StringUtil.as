@@ -28,10 +28,6 @@ public class StringUtil{
 			}
 			txt_str = txt_str.substring(0, txt_str.length-1);
 		}
-		//trace("trimed text: " + txt_str);
-		//for(var i=0; i<txt_str.length; i++){
-		//	trace(txt_str.charCodeAt(i));
-		//}
 		return txt_str;
 	}    
 	

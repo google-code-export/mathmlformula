@@ -12,8 +12,8 @@ import flash.display.MovieClip;
 public class TableBox extends Box{
 	
 	//private var children:Array;
-	public var rowalign:String = "";			// (top | bottom | center) 
-	public var columnalign:String = ""; 			// (left | center | right)
+	public var rowalign:String = "";			// (top || bottom || center) 
+	public var columnalign:String = ""; 			// (left || center || right)
 	public var rowspacing:Number = -1;			// exact units or -1 default
 	public var columnspacing:Number = -1;			// exact units or -1 default
 	public var framespacing:Number = -1;			// exact units or -1 default

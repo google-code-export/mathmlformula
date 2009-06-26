@@ -48,7 +48,7 @@ public class FontConstant{
 		var tfield:TextField = new TextField();
 		tfield.defaultTextFormat = getTextFormat(style);
 		tfield.text = text;
-		var add = 4;
+		var add:int = 4;
 		if(style.fontstyle=='italic'){
 			add = 7;
 		}

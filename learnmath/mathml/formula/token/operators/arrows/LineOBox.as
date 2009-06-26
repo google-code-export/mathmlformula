@@ -48,8 +48,8 @@ public class LineOBox extends OBox{
 			var w1:Number = FontConstant.getWidth(style, "X");
 
 			if(stretchy){
-				var mSize = finalBounds.width;
-				var newX = finalBounds.x;
+				var mSize:int = finalBounds.width;
+				var newX:Number = finalBounds.x;
 				if(parentBox.finalBounds.width>finalBounds.width){
 					mSize = parentBox.finalBounds.width;
 					if(maxsize>-1 && mSize>(maxsize*w1)){

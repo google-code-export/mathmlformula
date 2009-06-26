@@ -27,7 +27,7 @@ public class IntersectOBox extends OBox{
 		finalBounds.width=k*h;
 		finalBounds.height=h;
 		finalBounds.y=finalBounds.y-finalBounds.height/2;
-		ResizeBox.addBox(this);
+		//ResizeBox.addBox(this);
 	}
 	
 	

@@ -13,7 +13,7 @@ public class FencedBox extends RowBox{
 	
 	public var linethickness:Number = 1;
 	
-	// accepted char: () [] {} | &langle; &rangle; &lceil;&rceil;  &lfloor; &rfloor; &Verbar;
+	// accepted char: () [] {} || &langle; &rangle; &lceil;&rceil;  &lfloor; &rfloor; &Verbar;
 	public var open:String = "(";
 	public var close:String = ")";
 	private var lfw:Number = 10;

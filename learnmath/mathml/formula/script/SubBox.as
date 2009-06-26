@@ -5,6 +5,7 @@ package learnmath.mathml.formula.script{
 	Site: www.learn-math.info
 ---------------------------------------------------------------*/
 import learnmath.mathml.formula.*;
+import learnmath.mathml.formula.layout.*;
 import flash.geom.*;
 import flash.display.MovieClip;
 
@@ -25,7 +26,11 @@ public class SubBox extends Box{
 		
 		var cE:Point = new Point();
 		cE.x = originPoint.x + base.finalBounds.width;
-		cE.y = originPoint.y + base.finalBounds.height/3;
+		if(sub is FracBox){
+			cE.y = originPoint.y + base.finalBounds.height/2;
+		}else{
+			cE.y = originPoint.y + base.finalBounds.height/3;
+		}
 		sub.calculateBox(cE);
 
 		finalBounds.x = base.finalBounds.x;
@@ -43,17 +48,23 @@ public class SubBox extends Box{
 		
 		var cS:Point = new Point();
 		cS.x = originPoint.x + base.finalBounds.width;
-		cS.y = originPoint.y + base.finalBounds.height/3;
+		if(sub is FracBox){
+			cS.y = originPoint.y + base.finalBounds.height/2;
+		}else{
+			cS.y = originPoint.y + base.finalBounds.height/3;
+		}
 		sub.moveOriginTo(cS);
 	}
 
 
 	override public function copyParentStyle(_styleParent:Style):void{
+		var s:int = 3;
+		if(sub is FracBox){ s = 5}
 		super.copyParentStyle(_styleParent);
 		
 		base.copyParentStyle(this.style);
 		var newStyle:Style = this.style.getCopy();
-		newStyle.size = newStyle.size -3;
+		newStyle.size = newStyle.size -s;
 		newStyle.fontweight='bold';
 		sub.copyParentStyle(newStyle);
 	}

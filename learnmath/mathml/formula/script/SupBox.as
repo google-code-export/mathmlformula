@@ -4,9 +4,11 @@ package learnmath.mathml.formula.script{
 	Mail: ionel.alexandru@gmail.com
 	Site: www.learn-math.info
 ---------------------------------------------------------------*/
-import learnmath.mathml.formula.*;
-import flash.geom.*;
 import flash.display.MovieClip;
+import flash.geom.*;
+
+import learnmath.mathml.formula.*;
+import learnmath.mathml.formula.layout.*;
 
 public class SupBox extends Box{
 	
@@ -26,7 +28,11 @@ public class SupBox extends Box{
 		
 		var cE:Point = new Point();
 		cE.x = originPoint.x + base.finalBounds.width;
-		cE.y = originPoint.y - base.finalBounds.height/3;
+		if(exp is FracBox){
+			cE.y = originPoint.y - base.finalBounds.height/2;
+		}else{
+			cE.y = originPoint.y - base.finalBounds.height/3;
+		}
 		exp.calculateBox(cE);
 
 		finalBounds.x = base.finalBounds.x;
@@ -44,18 +50,24 @@ public class SupBox extends Box{
 		
 		var cS:Point = new Point();
 		cS.x = originPoint.x + base.finalBounds.width;
-		cS.y = originPoint.y - base.finalBounds.height/3;
+		if(exp is FracBox){
+			cS.y = originPoint.y - base.finalBounds.height/2;
+		}else{
+			cS.y = originPoint.y - base.finalBounds.height/3;
+		}
 		exp.moveOriginTo(cS);
 
 	}
 	
 
 	override public function copyParentStyle(_styleParent:Style):void{
+		var s:int = 3;
+		if(exp is FracBox){ s = 5}
 		super.copyParentStyle(_styleParent);
 		
 		base.copyParentStyle(this.style);
 		var newStyle:Style = this.style.getCopy();
-		newStyle.size = newStyle.size -3;
+		newStyle.size = newStyle.size -s;
 		newStyle.fontweight='bold';
 		exp.copyParentStyle(newStyle);
 	}

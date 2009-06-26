@@ -11,8 +11,8 @@ import flash.display.MovieClip;
 public class TdBox extends Box{
 	
 	//private var children:Array;
-	public var rowalign:String = "";			//(top | bottom | center)
-	public var columnalign:String = ""; 		//(left | center | right)
+	public var rowalign:String = "";			//(top || bottom || center)
+	public var columnalign:String = ""; 		//(left || center || right)
 	public var rowspan:Number = 1;
 	public var columnspan:Number = 1;
 	

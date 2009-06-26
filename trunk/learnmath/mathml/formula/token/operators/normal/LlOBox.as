@@ -12,7 +12,7 @@ import flash.display.MovieClip;
 
 public class LlOBox extends OBox{
 
-	private var k:Number = 0.08;
+	private var k:Number = 0.04;
 	private var wl:Number = 1;
 
 	public function	LlOBox(parentBox:Box):void{
@@ -25,7 +25,7 @@ public class LlOBox extends OBox{
 		var h1:Number = FontConstant.getHeight(style, "X");
 		var w1:Number = FontConstant.getWidth(style, "X");
 		
-		finalBounds.width=w1*1.3;
+		finalBounds.width=w1*1.6;
 		finalBounds.height=h1;
 		finalBounds.y = finalBounds.y - h1/2
 	}
@@ -37,26 +37,23 @@ public class LlOBox extends OBox{
 	override public function draw(graph:MovieClip):void{
 		graph.graphics.lineStyle(finalBounds.height*k, getHexColor(), 100);
 		
-		wl = finalBounds.width*0.6;
+		graph.graphics.moveTo(finalBounds.x+finalBounds.width*0.45, finalBounds.y + finalBounds.height*0.70);
+		graph.graphics.lineTo(finalBounds.x+finalBounds.width*0.05, finalBounds.y + finalBounds.height*0.5);
 		
-		var step:Number = wl * 0.35;
-		graph.graphics.moveTo(finalBounds.x+finalBounds.width/2, finalBounds.y + finalBounds.height*0.5-wl/3);
-		graph.graphics.lineTo(finalBounds.x+finalBounds.width/2-wl/2, finalBounds.y + finalBounds.height*0.5);
-		
-		graph.graphics.moveTo(finalBounds.x+finalBounds.width/2, finalBounds.y + finalBounds.height*0.5+wl/3);
-		graph.graphics.lineTo(finalBounds.x+finalBounds.width/2-wl/2, finalBounds.y + finalBounds.height*0.5);
+		graph.graphics.moveTo(finalBounds.x+finalBounds.width*0.45, finalBounds.y + finalBounds.height*0.30);
+		graph.graphics.lineTo(finalBounds.x+finalBounds.width*0.05, finalBounds.y + finalBounds.height*0.5);
 
-		graph.graphics.moveTo(finalBounds.x+finalBounds.width/2 + step, finalBounds.y + finalBounds.height*0.5-wl/3);
-		graph.graphics.lineTo(finalBounds.x+finalBounds.width/2-wl/2 + step, finalBounds.y + finalBounds.height*0.5);
+		graph.graphics.moveTo(finalBounds.x+finalBounds.width*0.7, finalBounds.y + finalBounds.height*0.7);
+		graph.graphics.lineTo(finalBounds.x+finalBounds.width*0.3, finalBounds.y + finalBounds.height*0.5);
 		
-		graph.graphics.moveTo(finalBounds.x+finalBounds.width/2 + step, finalBounds.y + finalBounds.height*0.5+wl/3);
-		graph.graphics.lineTo(finalBounds.x+finalBounds.width/2-wl/2 + step, finalBounds.y + finalBounds.height*0.5);
+		graph.graphics.moveTo(finalBounds.x+finalBounds.width*0.7, finalBounds.y + finalBounds.height*0.3);
+		graph.graphics.lineTo(finalBounds.x+finalBounds.width*0.3, finalBounds.y + finalBounds.height*0.5);
 
-		graph.graphics.moveTo(finalBounds.x+finalBounds.width/2 + 2*step, finalBounds.y + finalBounds.height*0.5-wl/3);
-		graph.graphics.lineTo(finalBounds.x+finalBounds.width/2-wl/2 + 2*step, finalBounds.y + finalBounds.height*0.5);
+		graph.graphics.moveTo(finalBounds.x+finalBounds.width*0.95, finalBounds.y + finalBounds.height*0.7);
+		graph.graphics.lineTo(finalBounds.x+finalBounds.width*0.55, finalBounds.y + finalBounds.height*0.5);
 		
-		graph.graphics.moveTo(finalBounds.x+finalBounds.width/2 + 2*step, finalBounds.y + finalBounds.height*0.5+wl/3);
-		graph.graphics.lineTo(finalBounds.x+finalBounds.width/2-wl/2 + 2*step, finalBounds.y + finalBounds.height*0.5);
+		graph.graphics.moveTo(finalBounds.x+finalBounds.width*0.95, finalBounds.y + finalBounds.height*0.3);
+		graph.graphics.lineTo(finalBounds.x+finalBounds.width*0.55, finalBounds.y + finalBounds.height*0.5);
 
 	}
 	

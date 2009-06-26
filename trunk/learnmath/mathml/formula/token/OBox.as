@@ -1,4 +1,4 @@
-package learnmath.mathml.formula.token{
+﻿package learnmath.mathml.formula.token{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -14,7 +14,7 @@ import flash.geom.*;
 import flash.display.MovieClip;
 
 public class OBox extends TokenBox{
-	protected var text:String = "";
+	public var text:String = "";
 	
 	public var stretchy:Boolean = true;
 	public var maxsize:int = -1;
@@ -34,12 +34,14 @@ public class OBox extends TokenBox{
 		var s:Point = new Point();
 		s.x = originPoint.x;
 		s.y = originPoint.y - finalBounds.height/2;
-		DrawFormula.createText(graph, s, text, style);
+		//DrawFormula.createText(graph, s, text, style);
+		drawText(graph, s, text);
+
 	}
 
 	public static function getOBox(text:String, parentBox:Box):OBox{
 		text = EntityManager.replaceWithKnownCode(text);
-		if(text=='&Integral;'){
+		if(text=='&Integral;' || text=='∫'){
 			return new IntOBox(parentBox);
 		}else if(text=='&Int;'){
 			return new Int1OBox(parentBox);
@@ -64,9 +66,9 @@ public class OBox extends TokenBox{
 		}else if(text=='&fpartint;'){
 			return new Int11OBox(parentBox);
 			
-		}else if(text=='&sum;'){
+		}else if(text=='&sum;' || text=='∑'){
 			return new SumOBox(parentBox);
-		}else if(text=='&prod;'){
+		}else if(text=='&prod;' || text=='∏'){
 			return new ProdOBox(parentBox);
 		}else if(text=='&coprod;'){
 			return new CoProdOBox(parentBox);
@@ -101,11 +103,11 @@ public class OBox extends TokenBox{
 			return new HatOBox(parentBox);
 		}else if(text=='&Tilde;'){
 			return new TildeOBox(parentBox);
-		}else if(text=='&rarr;'){
+		}else if(text=='&rarr;' || text=='→'){
 			return new RArrOBox(parentBox);
-		}else if(text=='&larr;'){
+		}else if(text=='&larr;' || text=='←'){
 			return new LArrOBox(parentBox);
-		}else if(text=='&harr;'){
+		}else if(text=='&harr;' || text=='↔'){
 			return new HArrOBox(parentBox);
 		}else if(text=='&rharu;'){
 			return new RharuOBox(parentBox);
@@ -136,6 +138,20 @@ public class OBox extends TokenBox{
 			return new GgOBox(parentBox);
 		}else if(text=='&Ll;'){
 			return new LlOBox(parentBox);
+		}else if(text=='&par;'){
+			return new ParOBox(parentBox);
+		}else if(text=='&NotGreaterGreater;'){
+			return new NotGGOBox(parentBox);
+		}else if(text=='&NotLessLess;'){
+			return new NotLLOBox(parentBox);
+		}else if(text=='&nless;'){
+			return new NLessOBox(parentBox);
+		}else if(text=='&ngtr;'){
+			return new NGtrOBox(parentBox);
+		}else if(text=='&nleqq;'){
+			return new NLeqqOBox(parentBox);
+		}else if(text=='&ngeqq;'){
+			return new NGeqqOBox(parentBox);
 		}
 		var newObox:OBox =  new OBox(parentBox);
 		newObox.text = EntityManager.replaceAllCode(text);

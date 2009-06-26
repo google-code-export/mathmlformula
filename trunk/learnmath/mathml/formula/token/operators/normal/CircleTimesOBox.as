@@ -13,7 +13,7 @@ import flash.display.MovieClip;
 
 public class CircleTimesOBox extends OBox{
 
-	private var k:Number = 0.05;
+	private var k:Number = 0.04;
 	private var wl:Number = 2;
 
 	public function	CircleTimesOBox(parentBox:Box):void{
@@ -40,7 +40,7 @@ public class CircleTimesOBox extends OBox{
 		
 		var x:Number = finalBounds.x + finalBounds.width/2;
 		var y:Number = finalBounds.y + finalBounds.height*0.55;
-		var rx:Number = finalBounds.width/2 -1;
+		var rx:Number = finalBounds.width/2 -2;
 		
 		DrawUtil.drawOval(graph, x, y, rx, rx);		
 

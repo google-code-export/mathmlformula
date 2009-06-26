@@ -88,7 +88,7 @@ public class PaddedBox extends RowBox{
 	
 	public function calcValue(number:String, def:int):int{
 		if(number.indexOf("%")>-1){
-			var s = number.substring(0, number.indexOf("%"));
+			var s:String = number.substring(0, number.indexOf("%"));
 			var n:int = int(s);
 			return n/100*def;
 		}else{

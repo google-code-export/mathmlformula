@@ -10,7 +10,7 @@ import flash.geom.*;
 import flash.display.MovieClip;
 
 public class NBox extends TokenBox{
-	public var number:Number;
+	public var number:String;
 	
 	
 	public function	NBox(parentBox:Box):void{
@@ -26,7 +26,9 @@ public class NBox extends TokenBox{
 		var s:Point = new Point();
 		s.x = originPoint.x;
 		s.y = originPoint.y - finalBounds.height/2;
-		DrawFormula.createText(graph, s, "" + number, style);
+		//DrawFormula.createText(graph, s, "" + number, style);
+		drawText(graph, s, number);
+
 	}
 	
 }

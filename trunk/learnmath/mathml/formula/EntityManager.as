@@ -1,4 +1,4 @@
-package learnmath.mathml.formula{
+﻿package learnmath.mathml.formula{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -116,6 +116,7 @@ public class EntityManager{
 	
 
 	private static function getCustomUnicode(code:String):String{
+		if(code=='&sdot;') return "•";
 		if(code=='&plus;') return "+";
 		if(code=='&minus;') return "-";
 		if(code=='&it;' || code=='&InvisibleTimes;') return " ";

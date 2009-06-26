@@ -23,6 +23,7 @@ public class RowBox extends Box{
 	
 
 	public override function calculate():void{
+		if(children.length==0) return;
 		var childx:Number = 0;
 		for(var i:int =0; i<children.length;i++){
 			var child:Box = children[i];

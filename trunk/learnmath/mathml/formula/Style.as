@@ -57,6 +57,9 @@ public class Style{
 		return c;
 	}
 
+	public function toString():String{
+		return "color:" + color + " fontweight:" + fontweight;
+	}
 
 }
 

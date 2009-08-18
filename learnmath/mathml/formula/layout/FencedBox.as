@@ -1,4 +1,4 @@
-package learnmath.mathml.formula.layout{
+﻿package learnmath.mathml.formula.layout{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -11,7 +11,7 @@ import flash.display.MovieClip;
 
 public class FencedBox extends RowBox{
 	
-	public var linethickness:Number = 1;
+	public var linethickness:Number = 0;
 	
 	// accepted char: () [] {} || &langle; &rangle; &lceil;&rceil;  &lfloor; &rfloor; &Verbar;
 	public var open:String = "(";

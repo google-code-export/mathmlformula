@@ -1,4 +1,4 @@
-package learnmath.mathml.formula{
+﻿package learnmath.mathml.formula{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -134,9 +134,11 @@ public class Box{
 	}
 
 	public function getTinethickness(l:Number, kLine:Number):Number{
-		var s:Number = 1;
-		if(l==1){
+		var s:Number = l;
+		if(l==0){
 			s = finalBounds.height * kLine;
+		}else{
+			return l;
 		}
 		if(s<1){
 			s=1;

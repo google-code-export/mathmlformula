@@ -12,7 +12,7 @@ public class FracBox extends Box{
 	
 	public var num:Box;
 	public var denum:Box;
-	public var linethickness:Number = 1;
+	public var linethickness:Number = 0;
 	private var kLine:Number = 0.06;
 	public var bevelled:Boolean = false;
 	

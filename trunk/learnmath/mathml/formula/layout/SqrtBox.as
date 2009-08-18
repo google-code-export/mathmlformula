@@ -1,4 +1,4 @@
-package learnmath.mathml.formula.layout{
+﻿package learnmath.mathml.formula.layout{
 /*-------------------------------------------------------------
 	Created by: Ionel Alexandru 
 	Mail: ionel.alexandru@gmail.com
@@ -11,7 +11,7 @@ import flash.display.MovieClip;
 
 public class SqrtBox extends RowBox{
 	
-	public var linethickness:Number = 1;
+	public var linethickness:Number = 0;
 	private var kLine:Number = 0.06;		
 	
 	private var widthR:Number = 3;
